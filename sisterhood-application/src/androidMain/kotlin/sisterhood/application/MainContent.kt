@@ -1,4 +1,4 @@
-package sisterhood.compose
+package sisterhood.application
 
 import android.annotation.SuppressLint
 import androidx.compose.material.Scaffold
