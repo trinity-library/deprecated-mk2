@@ -12,7 +12,7 @@ import kotlinx.serialization.encoding.encodeCollection
 
 @Serializable
 data class EHentaiPageToken(
-    val gid: Long,
+    val gid: Int,
     val token: String,
     val page: Int
 ) {
@@ -24,7 +24,7 @@ data class EHentaiPageToken(
         override fun deserialize(decoder: Decoder): EHentaiPageToken =
             decoder.decodeStructure(descriptor) {
                 EHentaiPageToken(
-                    decodeLongElement(descriptor, 0),
+                    decodeIntElement(descriptor, 0),
                     decodeStringElement(descriptor, 1),
                     decodeIntElement(descriptor, 2)
                 )

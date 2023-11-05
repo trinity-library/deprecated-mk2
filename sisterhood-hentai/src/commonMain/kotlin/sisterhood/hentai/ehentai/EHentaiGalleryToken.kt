@@ -12,7 +12,7 @@ import kotlinx.serialization.encoding.encodeCollection
 
 @Serializable
 data class EHentaiGalleryToken(
-    val gid: Long,
+    val gid: Int,
     val token: String
 ) {
     object EHentaiGalleryTokenAsListSerializer : KSerializer<EHentaiGalleryToken> {
@@ -22,7 +22,7 @@ data class EHentaiGalleryToken(
 
         override fun deserialize(decoder: Decoder): EHentaiGalleryToken =
             decoder.decodeStructure(descriptor) {
-                EHentaiGalleryToken(decodeLongElement(descriptor, 0), decodeStringElement(descriptor, 1))
+                EHentaiGalleryToken(decodeIntElement(descriptor, 0), decodeStringElement(descriptor, 1))
             }
 
         override fun serialize(encoder: Encoder, value: EHentaiGalleryToken) =

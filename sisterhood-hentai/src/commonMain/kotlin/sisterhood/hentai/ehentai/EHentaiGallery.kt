@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class EHentaiGallery(
-    val gid: Long,
+    val gid: Int,
     val token: String,
     @SerialName("archiver_key")
     val archiverKey: String,
