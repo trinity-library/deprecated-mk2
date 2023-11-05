@@ -5,7 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class EHentaiGallery(
-    val gid: Long,
+    @SerialName("gid")
+    val id: Int,
     val token: String,
     @SerialName("archiver_key")
     val archiverKey: String,
@@ -16,19 +17,22 @@ data class EHentaiGallery(
     val thumb: String,
     val uploader: String,
     val posted: String,
-    val filecount: String,
-    val filesize: Long,
+    @SerialName("filecount")
+    val fileCount: String,
+    @SerialName("filesize")
+    val fileSize: Long,
     val expunged: Boolean,
     val rating: String,
-    val torrentcount: String,
+    @SerialName("torrentcount")
+    val torrentCount: String,
     val torrents: List<EHentaiTorrent>,
     val tags: List<String>,
     @SerialName("parent_gid")
-    val parentGid: String,
+    val parentID: String,
     @SerialName("parent_key")
     val parentKey: String,
     @SerialName("first_gid")
-    val firstGid: String,
+    val firstID: String,
     @SerialName("first_key")
     val firstKey: String,
 )

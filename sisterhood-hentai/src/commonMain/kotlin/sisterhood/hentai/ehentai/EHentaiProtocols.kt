@@ -1,5 +1,6 @@
 package sisterhood.hentai.ehentai
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -7,21 +8,25 @@ sealed class EHentaiRequest(val method: String)
 
 @Serializable
 data class EHentaiGalleryRequest(
-    val gidlist: List<@Serializable(EHentaiGalleryToken.EHentaiGalleryTokenAsListSerializer::class) EHentaiGalleryToken>,
+    @SerialName("gidlist")
+    val ids: List<@Serializable(EHentaiGalleryToken.EHentaiGalleryTokenAsListSerializer::class) EHentaiGalleryToken>,
     val namespace: Boolean
 ) : EHentaiRequest(method = "gdata")
 
 @Serializable
 data class EHentaiGalleryResponse(
-    val gmetadata: List<EHentaiGallery>
+    @SerialName("gmetadata")
+    val galleries: List<EHentaiGallery>
 )
 
 @Serializable
 data class EHentaiGalleryTokenRequest(
-    val pagelist: List<@Serializable(EHentaiPageToken.EHentaiPageTokenAsListSerializer::class) EHentaiPageToken>
+    @SerialName("pagelist")
+    val pages: List<@Serializable(EHentaiPageToken.EHentaiPageTokenAsListSerializer::class) EHentaiPageToken>
 ) : EHentaiRequest(method = "gtoken")
 
 @Serializable
 data class EHentaiGalleryTokenResponse(
-    val tokenlist: List<EHentaiGalleryToken>
+    @SerialName("tokenlist")
+    val tokens: List<EHentaiGalleryToken>
 )
