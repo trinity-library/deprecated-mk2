@@ -7,17 +7,29 @@ androidx-core = "1.12.0"
 
 compose = "1.5.3"
 
+kotest = "5.8.0"
+
 kotlin = "1.9.10"
 
-ktor-client = "2.3.2"
+kotlinx-coroutines = "1.7.3"
+kotlinx-serialization = "1.6.0"
+
+ktor = "2.3.2"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
 
-ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor-client" }
-ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor-client" }
+kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
+
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+
+ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
@@ -26,3 +38,4 @@ android-library = { id = "com.android.library", version.ref = "android-gradle-pl
 jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "compose" }
 
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin-plugin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
