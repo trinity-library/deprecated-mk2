@@ -1,6 +1,9 @@
 name: Check
-run-name: Check has started by ${{ github.actor }} (#${{ github.event.pull_request.number }})
-on: [ push ]
+run-name: Check has started by ${{ github.actor }}
+on:
+  pull_request:
+    branches:
+      - main
 permissions:
   pull-requests: read
 env:
