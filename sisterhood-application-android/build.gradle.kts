@@ -1,11 +1,15 @@
+import sisterhood.androidNamespace
+
 plugins {
-    alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.compose)
-    alias(libs.plugins.kotlin.multiplatform)
+    id(libs.plugins.android.application.get().pluginId)
+    id(libs.plugins.kotlin.multiplatform.get().pluginId)
 }
 
 kotlin {
     androidTarget()
+    jvmToolchain(17)
+
     sourceSets {
         val androidMain by getting {
             dependencies {
@@ -16,17 +20,5 @@ kotlin {
 }
 
 android {
-    compileSdk = 34
-    namespace = "trinity.sisterhood"
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    defaultConfig {
-        minSdk = 30
-    }
-    kotlin {
-        jvmToolchain(17)
-    }
+    namespace = androidNamespace
 }
