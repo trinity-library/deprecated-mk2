@@ -1,5 +1,5 @@
 name: Check
-run-name: Check has started by ${{ github.actor }}
+run-name: Check has started by ${{ github.actor }} (${{ github.event.number }})
 on: [ push ]
 env:
   JAVA_VERSION: 17
@@ -13,6 +13,7 @@ jobs:
         with:
           java-version: ${{ env.JAVA_VERSION }}
           distribution: 'temurin'
+          cache: 'gradle'
       - name: Check lint
         run: ./gradlew lint
       - name: Check projects
