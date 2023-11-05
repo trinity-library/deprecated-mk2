@@ -1,3 +1,5 @@
+import sisterhood.androidCompileSdk
+import sisterhood.androidMinSdk
 import sisterhood.androidNamespace
 
 plugins {
@@ -20,5 +22,10 @@ kotlin {
 }
 
 android {
-    namespace = androidNamespace
+    compileSdk = androidCompileSdk
+    namespace = "$androidNamespace.android"
+
+    defaultConfig {
+        minSdk = androidMinSdk
+    }
 }
