@@ -23,9 +23,9 @@ class EHentaiClient(private val httpClient: HttpClient) {
         }
 
         return try {
-            response.body<EHentaiGalleryResponse>().gmetadata
+            response.body<EHentaiGalleryResponse>().galleries
         } catch (e: NoTransformationFoundException) {
-            json.decodeFromString<EHentaiGalleryResponse>(response.bodyAsText()).gmetadata
+            json.decodeFromString<EHentaiGalleryResponse>(response.bodyAsText()).galleries
         }
     }
 
@@ -37,9 +37,9 @@ class EHentaiClient(private val httpClient: HttpClient) {
         }
 
         return try {
-            response.body<EHentaiGalleryTokenResponse>().tokenlist.map { it.token }
+            response.body<EHentaiGalleryTokenResponse>().tokens.map { it.token }
         } catch (e: NoTransformationFoundException) {
-            json.decodeFromString<EHentaiGalleryTokenResponse>(response.bodyAsText()).tokenlist.map { it.token }
+            json.decodeFromString<EHentaiGalleryTokenResponse>(response.bodyAsText()).tokens.map { it.token }
         }
     }
 }

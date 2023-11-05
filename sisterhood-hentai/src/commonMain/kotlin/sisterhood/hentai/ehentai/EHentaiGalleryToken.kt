@@ -2,6 +2,7 @@ package sisterhood.hentai.ehentai
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.descriptors.listSerialDescriptor
@@ -12,7 +13,8 @@ import kotlinx.serialization.encoding.encodeCollection
 
 @Serializable
 data class EHentaiGalleryToken(
-    val gid: Int,
+    @SerialName("gid")
+    val id: Int,
     val token: String
 ) {
     object EHentaiGalleryTokenAsListSerializer : KSerializer<EHentaiGalleryToken> {
@@ -27,7 +29,7 @@ data class EHentaiGalleryToken(
 
         override fun serialize(encoder: Encoder, value: EHentaiGalleryToken) =
             encoder.encodeCollection(descriptor, 2) {
-                encodeStringElement(descriptor, 0, value.gid.toString())
+                encodeStringElement(descriptor, 0, value.id.toString())
                 encodeStringElement(descriptor, 1, value.token)
             }
     }

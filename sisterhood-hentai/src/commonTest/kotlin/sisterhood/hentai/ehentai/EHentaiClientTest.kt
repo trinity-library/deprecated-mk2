@@ -25,7 +25,7 @@ class EHentaiClientTest : ExpectSpec() {
 
             // Then
             galleries.size shouldBeExactly 1
-            galleries[0].gid shouldBeExactly gid
+            galleries[0].id shouldBeExactly gid
             galleries[0].token shouldBe token
         }
 

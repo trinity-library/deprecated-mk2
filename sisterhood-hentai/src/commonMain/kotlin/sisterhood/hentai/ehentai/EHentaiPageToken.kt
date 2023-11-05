@@ -2,6 +2,7 @@ package sisterhood.hentai.ehentai
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.descriptors.listSerialDescriptor
@@ -12,7 +13,8 @@ import kotlinx.serialization.encoding.encodeCollection
 
 @Serializable
 data class EHentaiPageToken(
-    val gid: Int,
+    @SerialName("gid")
+    val id: Int,
     val token: String,
     val page: Int
 ) {
@@ -32,7 +34,7 @@ data class EHentaiPageToken(
 
         override fun serialize(encoder: Encoder, value: EHentaiPageToken) =
             encoder.encodeCollection(descriptor, 2) {
-                encodeStringElement(descriptor, 0, value.gid.toString())
+                encodeStringElement(descriptor, 0, value.id.toString())
                 encodeStringElement(descriptor, 1, value.token)
                 encodeStringElement(descriptor, 2, value.page.toString())
             }
