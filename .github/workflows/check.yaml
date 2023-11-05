@@ -1,4 +1,5 @@
-name: Check has started by ${{ github.actor }}
+name: Check
+run-name: Check has started by ${{ github.actor }}
 on: [ push ]
 env:
   JAVA_VERSION: 17
