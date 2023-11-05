@@ -1,5 +1,5 @@
 name: Check
-run-name: Check has started by ${{ github.actor }} (${{ github.event.number }})
+run-name: Check has started by ${{ github.actor }} (#${{ github.event.pull_request.number }})
 on: [ push ]
 env:
   JAVA_VERSION: 17
