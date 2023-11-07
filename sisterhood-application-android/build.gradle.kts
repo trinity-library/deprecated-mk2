@@ -3,7 +3,7 @@ import sisterhood.androidMinSdk
 import sisterhood.androidNamespace
 
 plugins {
-    alias(libs.plugins.jetbrains.compose)
+    alias(libs.plugins.compose)
     id(libs.plugins.android.application.get().pluginId)
     id(libs.plugins.kotlin.multiplatform.get().pluginId)
 }
