@@ -1,16 +1,23 @@
 package sisterhood.application
 
-import android.annotation.SuppressLint
-import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import sisterhood.application.navi.Navi
+import sisterhood.application.navi.Root
 
 @Preview
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun MainContent() {
-    Scaffold {
-        Text("Hello, world!")
+fun MainApp() {
+    Navi(startRoute = Root / "Main") { currentRoute ->
+        when(currentRoute) {
+            Root / "Main" -> {
+                Text("Hello, Main!")
+            }
+
+            Root / "Settings" -> {
+                Text("Hello, Settings!")
+            }
+        }
     }
 }
