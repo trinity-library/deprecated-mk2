@@ -25,6 +25,9 @@ fun Project.androidWithDefault(configure: LibraryExtension.() -> Unit = {}) {
             sourceCompatibility = JavaVersion.VERSION_17
             targetCompatibility = JavaVersion.VERSION_17
         }
+        composeOptions {
+            kotlinCompilerExtensionVersion = "1.5.4"
+        }
         defaultConfig {
             minSdk = androidMinSdk
         }
