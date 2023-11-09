@@ -8,10 +8,10 @@ plugins {
 
 
 kotlin {
-    sourceSets {
-        androidTarget()
-        jvmToolchain(17)
+    androidTarget()
+    jvmToolchain(17)
 
+    sourceSets {
         val commonMain by getting {
             dependencies {
                 implementation(libs.kotlinx.serialization.json)
@@ -28,7 +28,6 @@ kotlin {
         }
 
         val androidMain by getting {
-            dependsOn(commonMain)
             dependencies {
                 implementation(libs.ktor.client.android)
             }
