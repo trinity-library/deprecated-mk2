@@ -1,9 +1,20 @@
 package sisterhood.application.navi
 
-class NaviState {
-    private val stack = arrayDequeOf(Root)
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
 
-    var currentRoute: Route
+class NaviState {
+    private val mapping: MutableMap<String, Screen> = mutableMapOf()
+    private val stack: ArrayDeque<String> = arrayDequeOf()
+
+    var currentRoute: String
         get() = stack.peek()!!
         set(route) = stack.push(route)
+
+    val currentScreen: Screen?
+        get() = mapping[currentRoute]
+
+    fun registerRoute(route: String, screen: Screen) {
+        mapping[route] = screen
+    }
 }
