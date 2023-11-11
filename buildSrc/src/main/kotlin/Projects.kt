@@ -18,9 +18,15 @@ fun Project.androidWithDefault(configure: LibraryExtension.() -> Unit = {}) {
         compileSdk = androidCompileSdk
         namespace = androidNamespace
 
+        buildFeatures {
+            compose = true
+        }
         compileOptions {
             sourceCompatibility = JavaVersion.VERSION_17
             targetCompatibility = JavaVersion.VERSION_17
+        }
+        composeOptions {
+            kotlinCompilerExtensionVersion = "1.5.4"
         }
         defaultConfig {
             minSdk = androidMinSdk
