@@ -9,7 +9,7 @@ import sisterhood.application.navi.Navi
 @Preview
 @Composable
 fun MainApp() {
-    Navi("/main") { currentRoute ->
+    Navi("/settings") {
         naviFrom("/main") {
             Button(onClick = { naviTo("/settings") }) {
                 Text("Go to settings")
@@ -17,7 +17,9 @@ fun MainApp() {
         }
 
         naviFrom("/settings") {
-            Text("Hello, Settings!")
+            Button(onClick = { naviTo("/main") }) {
+                Text("Go to main")
+            }
         }
     }
 }
