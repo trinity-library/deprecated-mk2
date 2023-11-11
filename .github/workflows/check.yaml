@@ -19,7 +19,5 @@ jobs:
           java-version: ${{ env.JAVA_VERSION }}
           distribution: 'temurin'
           cache: 'gradle'
-      - name: Check lint
-        run: ./gradlew lint
       - name: Check projects
         run: ./gradlew check
