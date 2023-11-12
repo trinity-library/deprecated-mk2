@@ -16,10 +16,12 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(compose.runtime)
-                implementation(libs.kotlinx.serialization.json)
-                implementation(libs.ktor.client.content.negotiation)
-                implementation(libs.ktor.client.core)
-                implementation(libs.ktor.serialization.kotlinx.json)
+                api(libs.kotlinx.serialization.json)
+                api(libs.ktor.client.cio)
+                api(libs.ktor.client.content.negotiation)
+                api(libs.ktor.client.core)
+                api(libs.ktor.serialization.kotlinx.json)
+                api(projects.sisterhoodBase)
             }
         }
 
@@ -31,7 +33,7 @@ kotlin {
 
         val androidMain by getting {
             dependencies {
-                implementation(libs.ktor.client.android)
+                api(libs.ktor.client.android)
             }
         }
     }
