@@ -5,15 +5,14 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import sisterhood.application.navi.Navi
+import sisterhood.application.ui.Home
 
 @Preview
 @Composable
 fun MainApp() {
-    Navi("/settings") {
+    Navi("/main") {
         naviFrom("/main") {
-            Button(onClick = { naviTo("/settings") }) {
-                Text("Go to settings")
-            }
+            Home()
         }
 
         naviFrom("/settings") {
