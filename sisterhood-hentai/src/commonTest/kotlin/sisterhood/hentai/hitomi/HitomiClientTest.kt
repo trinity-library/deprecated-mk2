@@ -11,13 +11,24 @@ class HitomiClientTest : ExpectSpec() {
     init {
         expect("can retrieve a gallery") {
             // Given
-            val galleryID = 2726888
+            val galleryId = 2726888
 
             // When
-            val gallery = client.requestGallery(galleryID)
+            val gallery = client.requestGallery(galleryId).getOrThrow()!!
 
             // Then
-            gallery.id shouldBeExactly galleryID
+            gallery.id shouldBeExactly galleryId
+        }
+
+        expect("retrieve null if the gallery with given id doesn't exist") {
+            // Given
+            val galleryId = 0
+
+            // When
+            val gallery = client.requestGallery(galleryId).getOrThrow()
+
+            // Then
+            gallery shouldBe null
         }
 
         expect("can retrieve gallery ids") {
@@ -26,7 +37,7 @@ class HitomiClientTest : ExpectSpec() {
             val limit = 456
 
             // When
-            val galleryIds = client.requestGalleryIDs("all", offset, limit)
+            val galleryIds = client.requestGalleryIds("all", offset, limit).getOrThrow()
 
             // Then
             galleryIds.size shouldBeExactly limit
@@ -34,12 +45,12 @@ class HitomiClientTest : ExpectSpec() {
 
         expect("can retrieve pages with each extensions") {
             // Given
-            val galleryID = 2726888
+            val galleryId = 2726888
             val pageHash = "02251ff411fd9a78ac3a3ade18551e060e5c22a696b83d02af08da6294283573"
 
             // When
             val pages = HitomiImageExtension.entries.map { extension ->
-                client.requestPage(galleryID, pageHash, extension)
+                client.requestPage(galleryId, pageHash, extension).getOrThrow()!!
             }
 
             // Then
@@ -49,13 +60,13 @@ class HitomiClientTest : ExpectSpec() {
 
         expect("can retrieve thumbnails with each extensions and sizes") {
             // Given
-            val galleryID = 2726888
+            val galleryId = 2726888
             val thumbnailHash = "02251ff411fd9a78ac3a3ade18551e060e5c22a696b83d02af08da6294283573"
 
             // When
             val thumbnails = HitomiImageExtension.entries.flatMap { extension ->
                 HitomiThumbnailSize.entries.map { thumbnailSize ->
-                    client.requestThumbnail(galleryID, thumbnailHash, extension, thumbnailSize)
+                    client.requestThumbnail(galleryId, thumbnailHash, extension, thumbnailSize).getOrThrow()!!
                 }
             }
 
