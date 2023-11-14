@@ -1,4 +1,4 @@
-package sisterhood.hentai
+package sisterhood.hentai.service
 
 import sisterhood.Hentai
 import sisterhood.HentaiService

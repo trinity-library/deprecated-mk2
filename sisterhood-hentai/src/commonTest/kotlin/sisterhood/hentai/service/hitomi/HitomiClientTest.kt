@@ -1,4 +1,4 @@
-package sisterhood.hentai.hitomi
+package sisterhood.hentai.service.hitomi
 
 import io.kotest.core.spec.style.ExpectSpec
 import io.kotest.matchers.ints.shouldBeExactly

@@ -1,4 +1,4 @@
-package sisterhood.hentai.ehentai
+package sisterhood.hentai.service.ehentai
 
 import io.kotest.core.spec.style.ExpectSpec
 import io.kotest.matchers.ints.shouldBeExactly
@@ -6,6 +6,9 @@ import io.kotest.matchers.shouldBe
 import io.ktor.client.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.serialization.kotlinx.json.*
+import sisterhood.hentai.service.ehentai.EHentaiClient
+import sisterhood.hentai.service.ehentai.EHentaiGalleryToken
+import sisterhood.hentai.service.ehentai.EHentaiPageToken
 
 class EHentaiClientTest : ExpectSpec() {
     private val client = EHentaiClient(HttpClient() {

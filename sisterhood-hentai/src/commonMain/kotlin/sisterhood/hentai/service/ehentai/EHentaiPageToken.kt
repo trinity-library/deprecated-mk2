@@ -1,4 +1,4 @@
-package sisterhood.hentai.ehentai
+package sisterhood.hentai.service.ehentai
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
@@ -12,25 +12,31 @@ import kotlinx.serialization.encoding.decodeStructure
 import kotlinx.serialization.encoding.encodeCollection
 
 @Serializable
-data class EHentaiGalleryToken(
+data class EHentaiPageToken(
     @SerialName("gid")
     val id: Int,
-    val token: String
+    val token: String,
+    val page: Int
 ) {
-    object EHentaiGalleryTokenAsListSerializer : KSerializer<EHentaiGalleryToken> {
+    object EHentaiPageTokenAsListSerializer : KSerializer<EHentaiPageToken> {
         @OptIn(ExperimentalSerializationApi::class)
         override val descriptor: SerialDescriptor
             get() = listSerialDescriptor<String>()
 
-        override fun deserialize(decoder: Decoder): EHentaiGalleryToken =
+        override fun deserialize(decoder: Decoder): EHentaiPageToken =
             decoder.decodeStructure(descriptor) {
-                EHentaiGalleryToken(decodeIntElement(descriptor, 0), decodeStringElement(descriptor, 1))
+                EHentaiPageToken(
+                    decodeIntElement(descriptor, 0),
+                    decodeStringElement(descriptor, 1),
+                    decodeIntElement(descriptor, 2)
+                )
             }
 
-        override fun serialize(encoder: Encoder, value: EHentaiGalleryToken) =
+        override fun serialize(encoder: Encoder, value: EHentaiPageToken) =
             encoder.encodeCollection(descriptor, 2) {
                 encodeStringElement(descriptor, 0, value.id.toString())
                 encodeStringElement(descriptor, 1, value.token)
+                encodeStringElement(descriptor, 2, value.page.toString())
             }
     }
 }

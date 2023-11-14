@@ -1,4 +1,4 @@
-package sisterhood.hentai.hitomi
+package sisterhood.hentai.service.hitomi
 
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -7,7 +7,7 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
-import sisterhood.hentai.getResult
+import sisterhood.hentai.service.getResult
 import java.nio.ByteBuffer
 
 class HitomiClient(private val httpClient: HttpClient) {

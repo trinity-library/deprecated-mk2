@@ -1,4 +1,4 @@
-package sisterhood.hentai.hitomi
+package sisterhood.hentai.service.hitomi
 
 import kotlinx.serialization.Serializable
 
