@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS HentaiSpec (
+    id INTEGER NOT NULL PRIMARY KEY,
+    title TEXT NOT NULL,
+    fetchedAt INTEGER NOT NULL
+);

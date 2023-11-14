@@ -1,0 +1,4 @@
+package sisterhood
+
+interface HentaiRepository {
+}
