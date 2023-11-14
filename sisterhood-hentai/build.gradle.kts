@@ -3,6 +3,7 @@ import sisterhood.androidWithDefault
 plugins {
     alias(libs.plugins.compose)
     alias(libs.plugins.kotlin.plugin.serialization)
+    alias(libs.plugins.sqldelight)
     id(libs.plugins.android.library.get().pluginId)
     id(libs.plugins.kotlin.multiplatform.get().pluginId)
 }
@@ -21,6 +22,7 @@ kotlin {
                 api(libs.ktor.client.content.negotiation)
                 api(libs.ktor.client.core)
                 api(libs.ktor.serialization.kotlinx.json)
+                api(libs.sqldelight.sqlite)
                 api(projects.sisterhoodBase)
             }
         }
@@ -34,9 +36,22 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 api(libs.ktor.client.android)
+                api(libs.sqldelight.android)
             }
         }
     }
 }
 
 androidWithDefault()
+
+sqldelight {
+    databases {
+        create("HentaiDatabase") {
+            generateAsync = true
+            packageName = "sisterhood.hentai.repository"
+
+            dialect("app.cash.sqldelight:sqlite-3-38-dialect:${libs.versions.sqldelight.get()}")
+            srcDirs.setFrom("src/commonMain/sqldelight")
+        }
+    }
+}
