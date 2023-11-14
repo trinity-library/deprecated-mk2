@@ -1,5 +1,7 @@
 package sisterhood.hentai.service.hitomi
 
+import sisterhood.HentaiLanguage
+
 enum class HitomiLanguage {
     ENGLISH,
     JAPANESE,
@@ -44,4 +46,11 @@ enum class HitomiLanguage {
     UKRAINIAN,
     VIETNAMESE,
     NONE;
+
+    fun toHentaiLanguage(): HentaiLanguage =
+        try {
+            HentaiLanguage.valueOf(this.name)
+        } catch (_: IllegalAccessException) {
+            HentaiLanguage.UNSUPPORTED
+        }
 }
