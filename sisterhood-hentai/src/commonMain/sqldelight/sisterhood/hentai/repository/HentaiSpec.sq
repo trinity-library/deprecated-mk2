@@ -1,5 +1,21 @@
-CREATE TABLE IF NOT EXISTS HentaiSpec (
+import sisterhood.HentaiLanguage;
+
+CREATE TABLE IF NOT EXISTS hentaiSpec (
     id INTEGER NOT NULL PRIMARY KEY,
     title TEXT NOT NULL,
-    fetchedAt INTEGER NOT NULL
+    language TEXT AS HentaiLanguage NOT NULL,
+    createdAt INTEGER NOT NULL
 );
+
+CREATE VIEW IF NOT EXISTS hentaiView AS SELECT
+    hentaiSpec.id,
+    hentaiSpec.title,
+    hentaiSpec.language,
+    hentaiSpec.createdAt
+FROM hentaiSpec;
+
+insert:
+INSERT OR IGNORE INTO hentaiSpec(id, title, language, createdAt) VALUES (?, ?, ?, ?);
+
+select:
+SELECT * FROM hentaiView WHERE id IN ?;

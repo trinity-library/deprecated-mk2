@@ -39,6 +39,11 @@ kotlin {
                 api(libs.sqldelight.android)
             }
         }
+
+        val androidInstrumentedTest by getting {
+            dependencies {
+            }
+        }
     }
 }
 
