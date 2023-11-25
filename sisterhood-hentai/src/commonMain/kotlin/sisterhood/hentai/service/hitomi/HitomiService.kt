@@ -7,7 +7,7 @@ import sisterhood.HentaiService
 import java.time.Instant
 import java.time.format.DateTimeFormatter
 
-class KtorHentaiService(httpClient: HttpClient) : HentaiService {
+class HitomiService(httpClient: HttpClient) : HentaiService {
     private val hitomi = HitomiClient(httpClient)
 
     private val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ssX")

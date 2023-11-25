@@ -3,9 +3,9 @@ package sisterhood.hentai.service.hitomi
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 
-class KtorHentaiServiceFactory {
-    fun create(): KtorHentaiService {
+class HitomiServiceFactory {
+    fun create(): HitomiService {
         val httpClient = HttpClient(CIO)
-        return KtorHentaiService(httpClient)
+        return HitomiService(httpClient)
     }
 }
