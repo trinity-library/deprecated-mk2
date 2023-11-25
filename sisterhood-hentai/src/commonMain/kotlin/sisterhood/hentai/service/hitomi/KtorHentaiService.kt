@@ -1,10 +1,9 @@
-package sisterhood.hentai.service
+package sisterhood.hentai.service.hitomi
 
 import io.ktor.client.*
 import kotlinx.datetime.toKotlinInstant
 import sisterhood.Hentai
 import sisterhood.HentaiService
-import sisterhood.hentai.service.hitomi.HitomiClient
 import java.time.Instant
 import java.time.format.DateTimeFormatter
 
