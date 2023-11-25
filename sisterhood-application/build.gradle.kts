@@ -8,7 +8,6 @@ plugins {
 
 kotlin {
     androidTarget()
-    jvmToolchain(17)
 
     sourceSets {
         val androidMain by getting {
@@ -25,6 +24,7 @@ kotlin {
                 api(compose.preview)
                 api(compose.runtime)
                 api(compose.uiTooling)
+                api(project(":sisterhood-hentai"))
             }
         }
 
@@ -37,6 +37,3 @@ kotlin {
 }
 
 androidWithDefault()
-dependencies {
-    testImplementation("io.kotest:kotest-runner-junit5-jvm:4.6.0")
-}
