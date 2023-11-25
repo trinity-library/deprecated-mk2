@@ -47,6 +47,15 @@ enum class HitomiLanguage {
     VIETNAMESE,
     NONE;
 
+    companion object {
+        fun from(hentaiLanguage: HentaiLanguage) =
+            try {
+                valueOf(hentaiLanguage.name)
+            } catch (_: IllegalAccessException) {
+                NONE
+            }
+    }
+
     fun toHentaiLanguage(): HentaiLanguage =
         try {
             HentaiLanguage.valueOf(this.name)

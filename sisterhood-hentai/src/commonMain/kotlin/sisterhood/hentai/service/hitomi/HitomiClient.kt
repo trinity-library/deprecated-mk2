@@ -58,8 +58,8 @@ class HitomiClient(private val httpClient: HttpClient) {
                 }
             }
 
-    suspend fun requestGalleryIds(language: String, offset: Int, limit: Int): Result<List<Int>> =
-        httpClient.getResult("https://ltn.hitomi.la/index-$language.nozomi") {
+    suspend fun requestGalleryIds(language: HitomiLanguage, offset: Int, limit: Int): Result<List<HentaiId>> =
+        httpClient.getResult("https://ltn.hitomi.la/index-${language.name.lowercase()}.nozomi") {
             headers {
                 if (offset != 0 || limit != 0) {
                     append(HttpHeaders.Range, "bytes=${offset * 4}-${offset * 4 + limit * 4 - 1}")
@@ -69,7 +69,7 @@ class HitomiClient(private val httpClient: HttpClient) {
             val byteArray: ByteArray = response.body()
             val intBuffer = ByteBuffer.wrap(byteArray).asIntBuffer()
             (0..<(byteArray.size / 4))
-                .map { idx -> intBuffer.get(idx) }
+                .map { idx -> intBuffer.get(idx).toLong() }
                 .sortedDescending()
         }
 

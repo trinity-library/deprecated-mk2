@@ -4,6 +4,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import sisterhood.HentaiId
+import sisterhood.HentaiLanguage
 import sisterhood.hentai.service.hitomi.HitomiServiceFactory
 
 internal class HentaiPageStore {
@@ -13,15 +14,22 @@ internal class HentaiPageStore {
     suspend fun fetchInfo(id: HentaiId) =
         HitomiServiceFactory()
             .create()
-            .fetch(id)
+            .fetchHentai(id)
             .getOrNull()
             ?.let { HentaiInfo(it.id, it.title, it.language.name) }
 
-    suspend fun fetchThumbnail(id: HentaiId) = ByteArray(0)
+    suspend fun fetchThumbnail(id: HentaiId) =
+        HitomiServiceFactory()
+            .create()
+            .fetchThumbnail(id)
+            .getOrDefault(ByteArray(0))
 
-    suspend fun onRefresh() {
-        state = state.copy(ids = listOf(2726888L))
-    }
+    suspend fun onRefresh() =
+        HitomiServiceFactory()
+            .create()
+            .fetchIds(HentaiLanguage.KOREAN, 0, 10)
+            .getOrDefault(state.ids)
+            .let { state = state.copy(ids = it) }
 
     data class HentaiPageState(
         val ids: List<HentaiId> = emptyList()
