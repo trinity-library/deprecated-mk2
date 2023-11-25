@@ -7,6 +7,7 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
+import sisterhood.HentaiId
 import sisterhood.hentai.service.getResult
 import java.nio.ByteBuffer
 
@@ -42,7 +43,7 @@ class HitomiClient(private val httpClient: HttpClient) {
         return "https://atn.hitomi.la/$ext${size}tn/$processedHash/$hash.$ext"
     }
 
-    suspend fun requestGallery(id: Int): Result<HitomiGallery?> =
+    suspend fun requestGallery(id: HentaiId): Result<HitomiGallery?> =
         httpClient.getResult("https://ltn.hitomi.la/galleries/$id.js")
             .mapCatching { response ->
                 if (response.status == HttpStatusCode.NotFound) {
@@ -74,7 +75,7 @@ class HitomiClient(private val httpClient: HttpClient) {
 
 
     suspend fun requestPage(
-        id: Int,
+        id: HentaiId,
         pageHash: String,
         extension: HitomiImageExtension = HitomiImageExtension.WEBP
     ): Result<ByteArray> =
@@ -95,7 +96,7 @@ class HitomiClient(private val httpClient: HttpClient) {
         }
 
     suspend fun requestThumbnail(
-        id: Int,
+        id: HentaiId,
         thumbnailHash: String,
         extension: HitomiImageExtension = HitomiImageExtension.WEBP,
         thumbnailSize: HitomiThumbnailSize = HitomiThumbnailSize.SMALLBIG

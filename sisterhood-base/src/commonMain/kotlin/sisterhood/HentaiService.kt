@@ -1,5 +1,5 @@
 package sisterhood
 
 interface HentaiService {
-    suspend fun fetch(id: Int): Result<Hentai?>
+    suspend fun fetch(id: HentaiId): Result<Hentai?>
 }

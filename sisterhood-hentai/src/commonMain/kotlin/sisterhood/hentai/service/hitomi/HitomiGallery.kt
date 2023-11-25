@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class HitomiGallery(
-    val id: Int,
+    val id: Long,
     val title: String,
     val language: HitomiLanguage = HitomiLanguage.NONE,
     val files: List<HitomiFile>,

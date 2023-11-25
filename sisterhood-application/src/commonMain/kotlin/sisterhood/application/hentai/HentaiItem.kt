@@ -8,12 +8,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import sisterhood.HentaiId
 
 @Composable
 fun HentaiItem(
-    id: Int,
-    fetchInfo: suspend (Int) -> HentaiInfo?,
-    fetchThumbnail: suspend (Int) -> ByteArray
+    id: HentaiId,
+    fetchInfo: suspend (HentaiId) -> HentaiInfo?,
+    fetchThumbnail: suspend (HentaiId) -> ByteArray
 ) {
     val info by produceState<HentaiInfo?>(null) {
         value = withContext(Dispatchers.IO) { fetchInfo(id) }
