@@ -8,9 +8,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.layout.ContentScale
-import sisterhood.HentaiId
 import sisterhood.application.from
 import sisterhood.application.ui.AsyncImage
+import sisterhood.domain.HentaiId
 
 @Composable
 fun HentaiThumbnail(id: HentaiId, fetch: suspend (HentaiId) -> ByteArray) {

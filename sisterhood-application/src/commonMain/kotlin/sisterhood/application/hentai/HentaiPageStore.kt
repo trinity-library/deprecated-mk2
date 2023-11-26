@@ -3,9 +3,10 @@ package sisterhood.application.hentai
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import sisterhood.HentaiId
-import sisterhood.HentaiLanguage
+import sisterhood.domain.HentaiId
+import sisterhood.domain.HentaiLanguage
 import sisterhood.hentai.service.hitomi.HitomiServiceFactory
+import sisterhood.usecase.HentaiInfo
 
 internal class HentaiPageStore {
     var state: HentaiPageState by mutableStateOf(HentaiPageState())

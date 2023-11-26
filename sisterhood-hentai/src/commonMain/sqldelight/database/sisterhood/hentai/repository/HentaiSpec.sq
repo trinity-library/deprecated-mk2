@@ -1,4 +1,4 @@
-import sisterhood.HentaiLanguage;
+import sisterhood.domain.HentaiLanguage;
 
 CREATE TABLE IF NOT EXISTS hentaiSpec (
     id INTEGER NOT NULL PRIMARY KEY,

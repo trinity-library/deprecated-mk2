@@ -1,4 +1,4 @@
-package sisterhood
+package sisterhood.domain
 
 enum class HentaiTagKind {
     ARTIST,

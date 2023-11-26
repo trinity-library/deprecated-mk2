@@ -1,4 +1,4 @@
-package sisterhood
+package sisterhood.domain
 
 interface HentaiRepository {
     suspend fun insert(hentai: Hentai)

@@ -1,6 +1,6 @@
 package sisterhood.hentai.service.hitomi
 
-import sisterhood.HentaiLanguage
+import sisterhood.domain.HentaiLanguage
 
 enum class HitomiLanguage {
     ENGLISH,

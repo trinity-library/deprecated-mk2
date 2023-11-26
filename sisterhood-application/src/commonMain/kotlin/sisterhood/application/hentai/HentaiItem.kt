@@ -8,7 +8,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import sisterhood.HentaiId
+import sisterhood.domain.HentaiId
+import sisterhood.usecase.HentaiInfo
 
 @Composable
 fun HentaiItem(

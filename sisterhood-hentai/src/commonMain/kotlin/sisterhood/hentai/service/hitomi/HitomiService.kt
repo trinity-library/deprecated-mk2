@@ -2,7 +2,7 @@ package sisterhood.hentai.service.hitomi
 
 import io.ktor.client.*
 import kotlinx.datetime.toKotlinInstant
-import sisterhood.*
+import sisterhood.domain.*
 import java.time.Instant
 import java.time.format.DateTimeFormatter
 
@@ -32,4 +32,8 @@ class HitomiService(httpClient: HttpClient) : HentaiService {
                 hitomi.requestThumbnail(id, gallery.files.first().hash).getOrThrow()
             }
         }
+
+    override suspend fun fetchPage(id: HentaiId, number: Int): Result<HentaiImage?> {
+        TODO("Not yet implemented")
+    }
 }

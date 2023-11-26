@@ -7,7 +7,7 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
-import sisterhood.HentaiId
+import sisterhood.domain.HentaiId
 import sisterhood.hentai.service.getResult
 import java.nio.ByteBuffer
 
