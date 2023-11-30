@@ -1,8 +1,14 @@
 package sisterhood.hentai.cache
 
-import app.cash.sqldelight.db.SqlDriver
+import app.cash.sqldelight.db.QueryResult
+import app.cash.sqldelight.db.SqlSchema
+import sisterhood.hentai.SqliteDriverFactory
 
-class SqlDelightHentaiCacheFactory(private val sqliteDriver: SqlDriver) {
+class SqlDelightHentaiCacheFactory(
+    private val path: String,
+    private val schema: SqlSchema<QueryResult.AsyncValue<Unit>>,
+    private val sqliteDriverFactory: SqliteDriverFactory
+) {
     companion object {
         lateinit var instance: SqlDelightHentaiCache
     }
@@ -11,7 +17,7 @@ class SqlDelightHentaiCacheFactory(private val sqliteDriver: SqlDriver) {
         try {
             instance
         } catch (_: UninitializedPropertyAccessException) {
-            instance = SqlDelightHentaiCache(sqliteDriver)
+            instance = SqlDelightHentaiCache(sqliteDriverFactory.create(schema, path))
             instance
         }
 }

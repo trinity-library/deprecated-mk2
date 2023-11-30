@@ -10,7 +10,7 @@ import app.cash.sqldelight.db.SqlSchema
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 
 actual class SqliteDriverFactory(private val context: Context) {
-    actual fun create(schema: SqlSchema<QueryResult.AsyncValue<Unit>>, path: String?): SqlDriver {
+    actual fun create(schema: SqlSchema<QueryResult.AsyncValue<Unit>>, path: String): SqlDriver {
         val callback = object : AndroidSqliteDriver.Callback(schema.synchronous()) {
             private fun setPragma(db: SupportSQLiteDatabase, pragma: String) {
                 val cursor = db.query("PRAGMA $pragma")
@@ -18,8 +18,8 @@ actual class SqliteDriverFactory(private val context: Context) {
                 cursor.close()
             }
         }
-        
-        return if (path.isNullOrEmpty()) {
+
+        return if (path.isEmpty()) {
             AndroidSqliteDriver(
                 schema = schema.synchronous(),
                 context = context,
