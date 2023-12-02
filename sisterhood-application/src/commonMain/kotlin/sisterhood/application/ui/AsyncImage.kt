@@ -25,11 +25,8 @@ fun <T> AsyncImage(
     contentScale: ContentScale = ContentScale.Fit,
     alpha: Float = DefaultAlpha,
     colorFilter: ColorFilter? = null,
-    loadingContent: @Composable () -> Unit = @Composable {
-        Box(
-            modifier,
-            Alignment.Center
-        ) { CircularProgressIndicator() }
+    loadingContent: @Composable (Modifier) -> Unit = @Composable {
+        Box(modifier = it, contentAlignment = Alignment.Center) { CircularProgressIndicator() }
     },
 ) {
     val image: T? by produceState<T?>(null) {
@@ -53,6 +50,6 @@ fun <T> AsyncImage(
             colorFilter = colorFilter
         )
     } else {
-        loadingContent()
+        loadingContent(modifier)
     }
 }

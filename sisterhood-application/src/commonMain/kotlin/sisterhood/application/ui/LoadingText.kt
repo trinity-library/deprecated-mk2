@@ -32,6 +32,7 @@ operator fun TextUnit.div(other: TextUnit) = if (isSp == other.isSp) {
 fun LoadingText(
     fontSize: TextUnit = DEFAULT_SIZE.sp,
     length: Int = 10,
+    lines: Int = 1,
     animationDuration: Int = 500
 ) {
     val ratio = fontSize / DEFAULT_SIZE.sp
@@ -53,7 +54,7 @@ fun LoadingText(
         Canvas(modifier = Modifier) {
             drawRoundRect(
                 color = Color(scale, scale, scale),
-                size = Size(24f * length * ratio, 46f * ratio),
+                size = Size(24f * length * ratio, 46f * lines * ratio),
                 cornerRadius = CornerRadius(16f, 16f)
             )
         }
