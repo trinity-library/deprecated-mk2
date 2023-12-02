@@ -3,7 +3,7 @@ package sisterhood.hentai.repository
 import app.cash.sqldelight.EnumColumnAdapter
 import app.cash.sqldelight.db.SqlDriver
 import kotlinx.datetime.Instant
-import sisterhood.*
+import sisterhood.domain.*
 
 class SqlDelightHentaiRepository(sqliteDriver: SqlDriver) : HentaiRepository {
     private val db = HentaiDatabase(
@@ -15,11 +15,11 @@ class SqlDelightHentaiRepository(sqliteDriver: SqlDriver) : HentaiRepository {
 
     override suspend fun insert(hentai: Hentai) =
         db.hentaiSpecQueries
-            .insert(hentai.id.toLong(), hentai.title, hentai.language, hentai.createdAt.epochNanoseconds)
+            .insert(hentai.id, hentai.title, hentai.language, hentai.createdAt.epochNanoseconds)
 
-    override suspend fun select(vararg ids: Int): List<Hentai> =
+    override suspend fun select(vararg ids: HentaiId): List<Hentai> =
         db.hentaiSpecQueries
-            .select(ids.map { it.toLong() })
+            .select(ids.toList())
             .executeAsList()
-            .map { Hentai(it.id.toInt(), it.title, it.language, Instant.fromEpochNanoseconds(it.createdAt)) }
+            .map { Hentai(it.id, it.title, it.language, Instant.fromEpochNanoseconds(it.createdAt)) }
 }

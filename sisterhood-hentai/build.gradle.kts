@@ -51,12 +51,20 @@ androidWithDefault()
 
 sqldelight {
     databases {
+        create("HentaiCache") {
+            generateAsync = true
+            packageName = "sisterhood.hentai.cache"
+
+            dialect("app.cash.sqldelight:sqlite-3-38-dialect:${libs.versions.sqldelight.get()}")
+            srcDirs.setFrom("src/commonMain/sqldelight/cache")
+        }
+
         create("HentaiDatabase") {
             generateAsync = true
             packageName = "sisterhood.hentai.repository"
 
             dialect("app.cash.sqldelight:sqlite-3-38-dialect:${libs.versions.sqldelight.get()}")
-            srcDirs.setFrom("src/commonMain/sqldelight")
+            srcDirs.setFrom("src/commonMain/sqldelight/database")
         }
     }
 }

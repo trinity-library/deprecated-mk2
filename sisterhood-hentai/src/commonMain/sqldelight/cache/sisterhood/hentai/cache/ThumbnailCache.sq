@@ -1,0 +1,15 @@
+CREATE TABLE IF NOT EXISTS thumbnailCache(
+    id INTEGER PRIMARY KEY,
+    thumbnail BLOB NOT NULL
+);
+
+CREATE VIEW IF NOT EXISTS thumbnailView AS SELECT
+    thumbnailCache.id,
+    thumbnailCache.thumbnail
+FROM thumbnailCache;
+
+insert:
+INSERT OR IGNORE INTO thumbnailCache(id, thumbnail) VALUES (?, ?);
+
+select:
+SELECT * FROM thumbnailView WHERE id = ?;

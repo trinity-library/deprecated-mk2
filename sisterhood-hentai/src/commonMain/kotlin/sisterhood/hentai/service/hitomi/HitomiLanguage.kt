@@ -1,6 +1,6 @@
 package sisterhood.hentai.service.hitomi
 
-import sisterhood.HentaiLanguage
+import sisterhood.domain.HentaiLanguage
 
 enum class HitomiLanguage {
     ENGLISH,
@@ -46,6 +46,15 @@ enum class HitomiLanguage {
     UKRAINIAN,
     VIETNAMESE,
     NONE;
+
+    companion object {
+        fun from(hentaiLanguage: HentaiLanguage) =
+            try {
+                valueOf(hentaiLanguage.name)
+            } catch (_: IllegalAccessException) {
+                NONE
+            }
+    }
 
     fun toHentaiLanguage(): HentaiLanguage =
         try {
