@@ -11,11 +11,12 @@ import androidx.compose.ui.layout.ContentScale
 import sisterhood.application.from
 import sisterhood.application.ui.AsyncImage
 import sisterhood.domain.HentaiId
+import sisterhood.domain.HentaiImage
 
 @Composable
-fun HentaiThumbnail(id: HentaiId, fetch: suspend (HentaiId) -> ByteArray) {
+fun HentaiThumbnail(id: HentaiId, fetch: suspend (HentaiId) -> HentaiImage?) {
     AsyncImage(
-        load = { ImageBitmap.from(fetch(id)) },
+        load = { ImageBitmap.from(fetch(id) ?: ByteArray(0)) },
         painterFor = { remember { BitmapPainter(it) } },
         modifier = Modifier.aspectRatio(0.875f),
         contentDescription = "Thumbnail($id)",

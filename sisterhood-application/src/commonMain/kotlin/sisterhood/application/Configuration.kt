@@ -5,9 +5,11 @@ data class Configuration(
     val databasePath: String = ""
 ) {
     class Scope {
-        lateinit var cachePath: String
-        lateinit var databasePath: String
+        lateinit var appSpecificPath: String
 
-        fun build() = Configuration(cachePath, databasePath)
+        fun build() = Configuration(
+            appSpecificPath.plus("/.cache.db"),
+            appSpecificPath.plus("/.database.db")
+        )
     }
 }

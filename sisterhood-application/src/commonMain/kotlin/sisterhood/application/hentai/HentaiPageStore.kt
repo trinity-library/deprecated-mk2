@@ -3,31 +3,31 @@ package sisterhood.application.hentai
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import sisterhood.application.Dependency
 import sisterhood.domain.HentaiId
 import sisterhood.domain.HentaiLanguage
-import sisterhood.hentai.service.hitomi.HitomiServiceFactory
+import sisterhood.domain.HentaiService
 import sisterhood.usecase.HentaiInfo
 
-internal class HentaiPageStore {
+internal class HentaiPageStore(
+    private val hentaiService: HentaiService = Dependency.createHentaiService()
+) {
     var state: HentaiPageState by mutableStateOf(HentaiPageState())
         private set
 
     suspend fun fetchInfo(id: HentaiId) =
-        HitomiServiceFactory()
-            .create()
+        hentaiService
             .fetchHentai(id)
             .getOrNull()
             ?.let { HentaiInfo(it.id, it.title, it.language.name) }
 
     suspend fun fetchThumbnail(id: HentaiId) =
-        HitomiServiceFactory()
-            .create()
+        hentaiService
             .fetchThumbnail(id)
             .getOrDefault(ByteArray(0))
 
     suspend fun onRefresh() =
-        HitomiServiceFactory()
-            .create()
+        hentaiService
             .fetchIds(HentaiLanguage.KOREAN, 0, 10)
             .getOrDefault(state.ids)
             .let { state = state.copy(ids = it) }

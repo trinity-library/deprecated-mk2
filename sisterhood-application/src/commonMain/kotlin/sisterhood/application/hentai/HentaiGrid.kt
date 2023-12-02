@@ -14,7 +14,7 @@ import sisterhood.usecase.HentaiInfo
 fun HentaiGrid(
     ids: List<HentaiId>,
     fetchInfo: suspend (HentaiId) -> HentaiInfo?,
-    fetchThumbnail: suspend (HentaiId) -> HentaiImage,
+    fetchThumbnail: suspend (HentaiId) -> HentaiImage?,
     onRefresh: suspend () -> Unit
 ) {
     val lazyGridState = rememberLazyGridState()

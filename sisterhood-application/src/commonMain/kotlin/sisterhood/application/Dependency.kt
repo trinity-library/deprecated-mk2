@@ -4,6 +4,8 @@ object Dependency {
     lateinit var configuration: Configuration
     lateinit var preparation: Preparation
 
+    fun createHentaiService() = preparation.serviceFactory.create()
+
     fun inject(action: Scope.() -> Unit) = Scope().action()
 
     class Scope {
