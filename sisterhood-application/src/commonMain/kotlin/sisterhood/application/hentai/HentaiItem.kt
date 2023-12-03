@@ -49,8 +49,8 @@ fun HentaiItem(
                 maxLines = 2,
             )
         } ?: run {
-            LoadingText(fontSize = DEFAULT_SIZE.sp, length = 16)
-            LoadingText(fontSize = DEFAULT_SIZE.sp, length = 16)
+            LoadingText(fontSize = DEFAULT_SIZE.sp, length = 18)
+            LoadingText(fontSize = DEFAULT_SIZE.sp, length = 18)
         }
     }
 

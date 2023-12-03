@@ -17,12 +17,13 @@ fun HentaiGrid(
     ids: List<HentaiId>,
     fetchInfo: suspend (HentaiId) -> HentaiInfo?,
     fetchThumbnail: suspend (HentaiId) -> HentaiThumbnailInfo?,
+    onFetchMoreIds: suspend () -> Unit,
     onRefresh: suspend () -> Unit
 ) {
     val lazyGridState = rememberLazyGridState()
 
     LaunchedEffect(lazyGridState.canScrollForward) {
-        onRefresh()
+        onFetchMoreIds()
     }
 
     LazyVerticalGrid(
