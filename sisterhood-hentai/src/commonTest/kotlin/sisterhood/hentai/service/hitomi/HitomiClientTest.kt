@@ -44,7 +44,7 @@ class HitomiClientTest : ExpectSpec() {
                 HttpClient(
                     MockEngine { request ->
                         respond(
-                            content = File("$resourcesPath/gallery-$galleryId.js").readText(),
+                            content = File("$resourcesPath/gallery-not-found.html").readText(),
                             status = HttpStatusCode.NotFound,
                             headers = headers {
                                 append(HttpHeaders.ContentType, "text/html; charset=UTF-8")
