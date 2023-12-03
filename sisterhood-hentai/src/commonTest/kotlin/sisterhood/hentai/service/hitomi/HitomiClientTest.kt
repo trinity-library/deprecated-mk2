@@ -18,7 +18,7 @@ class HitomiClientTest : ExpectSpec() {
             val galleryId = 2726888L
             val hitomiClient = HitomiClient(
                 HttpClient(
-                    MockEngine { request ->
+                    MockEngine {
                         respond(
                             content = File("$resourcesPath/gallery-$galleryId.js").readText(),
                             status = HttpStatusCode.OK,
@@ -42,9 +42,9 @@ class HitomiClientTest : ExpectSpec() {
             val galleryId = 0L
             val hitomiClient = HitomiClient(
                 HttpClient(
-                    MockEngine { request ->
+                    MockEngine {
                         respond(
-                            content = File("$resourcesPath/gallery-$galleryId.js").readText(),
+                            content = File("$resourcesPath/gallery-not-found.html").readText(),
                             status = HttpStatusCode.NotFound,
                             headers = headers {
                                 append(HttpHeaders.ContentType, "text/html; charset=UTF-8")
@@ -67,7 +67,7 @@ class HitomiClientTest : ExpectSpec() {
             val limit = 456
             val hitomiClient = HitomiClient(
                 HttpClient(
-                    MockEngine { request ->
+                    MockEngine {
                         respond(
                             content = File("$resourcesPath/id-index-$offset-$limit.nozomi").readBytes(),
                             status = HttpStatusCode.PartialContent,
@@ -125,11 +125,23 @@ class HitomiClientTest : ExpectSpec() {
 
         expect("can retrieve thumbnails with each extensions and sizes") {
             // Given
-            val galleryId = 2726888L
             val hitomiClient = HitomiClient(
                 HttpClient(
                     MockEngine { request ->
-                        respond(ByteArray(123))
+                        if (request.url.toString() == "https://ltn.hitomi.la/gg.js") {
+                            respond(
+                                content = File("$resourcesPath/gg.js").readText(),
+                                status = HttpStatusCode.OK,
+                                headers = headers {
+                                    append(HttpHeaders.ContentType, "application/javascript; charset=UTF-8")
+                                }
+                            )
+                        } else {
+                            respond(
+                                content = ByteArray(123),
+                                status = HttpStatusCode.OK
+                            )
+                        }
                     }
                 )
             )
@@ -138,13 +150,13 @@ class HitomiClientTest : ExpectSpec() {
             // When
             val thumbnails = HitomiImageExtension.entries.flatMap { extension ->
                 HitomiThumbnailSize.entries.map { thumbnailSize ->
-                    hitomiClient.requestThumbnail(galleryId, thumbnailHash, extension, thumbnailSize).getOrThrow()!!
+                    hitomiClient.requestThumbnail(thumbnailHash, extension, thumbnailSize).getOrThrow()
                 }
             }
 
             // Then
             thumbnails.size shouldBeExactly HitomiImageExtension.entries.size * HitomiThumbnailSize.entries.size
-            thumbnails.all { it.isNotEmpty() } shouldBe true
+            thumbnails.all { it?.isNotEmpty() ?: false } shouldBe true
         }
     }
 }

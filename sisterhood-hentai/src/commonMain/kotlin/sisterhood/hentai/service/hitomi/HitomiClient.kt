@@ -32,15 +32,18 @@ class HitomiClient(private val httpClient: HttpClient) {
         return "https://${aOrb}a.hitomi.la/$ext/$route/$hash.$ext"
     }
 
-    private fun thumbnailUrlString(
+    private suspend fun thumbnailUrlString(
         hash: String,
         extension: HitomiImageExtension,
         thumbnailSize: HitomiThumbnailSize
     ): String {
+        val gg = requestGG()
+
+        val aOrb = Char(97 + gg.m(gg.s(hash)))
         val ext = extension.name.lowercase()
         val processedHash = "${hash.last()}/${hash.substring(hash.length - 3, hash.length - 1)}"
         val size = thumbnailSize.name.lowercase()
-        return "https://atn.hitomi.la/$ext${size}tn/$processedHash/$hash.$ext"
+        return "https://${aOrb}tn.hitomi.la/$ext${size}tn/$processedHash/$hash.$ext"
     }
 
     suspend fun requestGallery(id: HentaiId): Result<HitomiGallery?> =
@@ -96,16 +99,18 @@ class HitomiClient(private val httpClient: HttpClient) {
         }
 
     suspend fun requestThumbnail(
-        id: HentaiId,
         thumbnailHash: String,
         extension: HitomiImageExtension = HitomiImageExtension.WEBP,
-        thumbnailSize: HitomiThumbnailSize = HitomiThumbnailSize.SMALLBIG
-    ): Result<ByteArray> =
+        thumbnailSize: HitomiThumbnailSize = HitomiThumbnailSize.BIG
+    ): Result<ByteArray?> =
         httpClient.getResult(thumbnailUrlString(thumbnailHash, extension, thumbnailSize)) {
             headers {
-                append(HttpHeaders.Referrer, "https://hitomi.la/reader/${id}.html")
+                append(HttpHeaders.Referrer, "https://hitomi.la")
             }
         }.mapCatching { response ->
-            response.readBytes()
+            when (response.status) {
+                HttpStatusCode.OK -> response.readBytes()
+                else -> null
+            }
         }
 }

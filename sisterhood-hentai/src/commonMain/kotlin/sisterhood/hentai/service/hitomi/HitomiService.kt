@@ -26,10 +26,10 @@ class HitomiService(httpClient: HttpClient) : HentaiService {
             }
         }
 
-    override suspend fun fetchThumbnail(id: HentaiId): Result<HentaiImage> =
+    override suspend fun fetchThumbnail(id: HentaiId): Result<HentaiImage?> =
         hitomi.requestGallery(id).mapCatching {
             it!!.let { gallery ->
-                hitomi.requestThumbnail(id, gallery.files.first().hash).getOrThrow()
+                hitomi.requestThumbnail(gallery.files.first().hash).getOrThrow()
             }
         }
 

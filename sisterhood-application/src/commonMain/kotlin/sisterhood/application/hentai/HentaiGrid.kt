@@ -9,20 +9,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.unit.dp
 import sisterhood.domain.HentaiId
-import sisterhood.domain.HentaiImage
 import sisterhood.usecase.HentaiInfo
+import sisterhood.usecase.HentaiThumbnailInfo
 
 @Composable
 fun HentaiGrid(
     ids: List<HentaiId>,
     fetchInfo: suspend (HentaiId) -> HentaiInfo?,
-    fetchThumbnail: suspend (HentaiId) -> HentaiImage?,
+    fetchThumbnail: suspend (HentaiId) -> HentaiThumbnailInfo?,
+    onFetchMoreIds: suspend () -> Unit,
     onRefresh: suspend () -> Unit
 ) {
     val lazyGridState = rememberLazyGridState()
 
     LaunchedEffect(lazyGridState.canScrollForward) {
-        onRefresh()
+        onFetchMoreIds()
     }
 
     LazyVerticalGrid(
