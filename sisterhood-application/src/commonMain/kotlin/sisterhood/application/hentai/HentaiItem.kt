@@ -15,8 +15,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import sisterhood.application.ui.LoadingText
 import sisterhood.domain.HentaiId
-import sisterhood.domain.HentaiImage
 import sisterhood.usecase.HentaiInfo
+import sisterhood.usecase.HentaiThumbnailInfo
 
 const val DEFAULT_SIZE = 14f
 
@@ -24,7 +24,7 @@ const val DEFAULT_SIZE = 14f
 fun HentaiItem(
     id: HentaiId,
     fetchInfo: suspend (HentaiId) -> HentaiInfo?,
-    fetchThumbnail: suspend (HentaiId) -> HentaiImage?
+    fetchThumbnail: suspend (HentaiId) -> HentaiThumbnailInfo?
 ) {
     val info by produceState<HentaiInfo?>(null) {
         value = withContext(Dispatchers.IO) { fetchInfo(id) }

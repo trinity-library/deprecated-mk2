@@ -1,10 +1,18 @@
 package sisterhood.application
 
+import sisterhood.usecase.HentaiUnitOfWork
+
 object Dependency {
     lateinit var configuration: Configuration
     lateinit var preparation: Preparation
 
     fun createHentaiService() = preparation.serviceFactory.create()
+
+    fun createHentaiUnitOfWork() = HentaiUnitOfWork(
+        hentaiCache = preparation.cacheFactory.create(),
+        hentaiRepository = preparation.repositoryFactory.create(),
+        hentaiService = preparation.serviceFactory.create()
+    )
 
     fun inject(action: Scope.() -> Unit) = Scope().action()
 
