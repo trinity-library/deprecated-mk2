@@ -29,7 +29,7 @@ kotlin {
 
         val commonTest by getting {
             dependencies {
-                api(libs.ktor.client.mock)
+                implementation(libs.ktor.client.mock)
                 implementation(libs.kotest.runner.junit5)
             }
         }
