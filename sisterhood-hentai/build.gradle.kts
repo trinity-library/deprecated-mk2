@@ -16,7 +16,6 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                api(compose.runtime)
                 api(libs.kotlinx.serialization.json)
                 api(libs.ktor.client.cio)
                 api(libs.ktor.client.content.negotiation)
@@ -36,6 +35,7 @@ kotlin {
 
         val androidMain by getting {
             dependencies {
+                api(compose.runtime)
                 api(libs.ktor.client.android)
                 api(libs.sqldelight.android)
             }
