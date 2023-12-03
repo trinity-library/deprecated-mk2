@@ -1,6 +1,6 @@
 package sisterhood.domain
 
-class HentaiTag constructor(
+data class HentaiTag(
     val kind: HentaiTagKind,
     val name: String
 )

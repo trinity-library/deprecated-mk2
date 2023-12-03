@@ -10,10 +10,10 @@ import sisterhood.usecase.HentaiUnitOfWork
 
 const val FETCH_SIZE = 10
 
-internal class HentaiPageStore(
+internal class HentaiComponentStore(
     private val uow: HentaiUnitOfWork = Dependency.createHentaiUnitOfWork()
 ) {
-    var state: HentaiPageState by mutableStateOf(HentaiPageState())
+    var state: HentaiComponentState by mutableStateOf(HentaiComponentState())
         private set
 
     suspend fun fetchInfo(id: HentaiId) = uow.selectOrFetchAndInsertHentai(id)
@@ -32,7 +32,7 @@ internal class HentaiPageStore(
     suspend fun onRefresh() =
         uow.fetchIds(HentaiLanguage.KOREAN, 0, FETCH_SIZE).let { state = state.copy(ids = it) }
 
-    data class HentaiPageState(
+    data class HentaiComponentState(
         val ids: List<HentaiId> = emptyList()
     )
 }

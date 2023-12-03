@@ -4,8 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 
 @Composable
-fun HentaiPage() {
-    val store = remember { HentaiPageStore() }
+fun HentaiComponent() {
+    val store = remember { HentaiComponentStore() }
 
     HentaiGrid(store.state.ids, store::fetchInfo, store::fetchThumbnail, store::onFetchMoreIds, store::onRefresh)
 }

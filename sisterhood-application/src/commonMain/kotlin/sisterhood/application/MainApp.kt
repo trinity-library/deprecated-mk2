@@ -12,7 +12,7 @@ fun MainApp() {
             MainScreen()
         }
 
-        naviFrom("/setting") {
+        naviFrom("/viewer") {
             SettingScreen()
         }
     }

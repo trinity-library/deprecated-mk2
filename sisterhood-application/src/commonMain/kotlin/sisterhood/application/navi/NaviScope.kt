@@ -5,6 +5,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import kotlinx.serialization.InternalSerializationApi
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.SerializationStrategy
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.modules.serializersModuleOf
+import kotlinx.serialization.serializer
 
 class NaviScope internal constructor(
     state: NaviState
@@ -13,6 +19,12 @@ class NaviScope internal constructor(
 
     fun naviTo(route: String) {
         state.currentRoute = route
+    }
+
+    @OptIn(InternalSerializationApi::class)
+    inline fun <reified T : Any> naviTo(route: String, prop: @Serializable T) {
+        naviTo(route)
+        state.prop = Json.encodeToString(T::class.serializer(), prop)
     }
 
     fun naviFrom(route: String, screen: Screen) {
@@ -25,6 +37,6 @@ class NaviScope internal constructor(
             Text("Not registered route: `${state.currentRoute}`")
             return
         }
-        state.mapping[state.currentRoute]!!(state.currentRoute)
+        (state.mapping[state.currentRoute] ?: { NotFound() })()
     }
 }

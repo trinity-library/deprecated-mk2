@@ -16,15 +16,13 @@ class HentaiUnitOfWork(
             .getOrNull()
         )?.let { HentaiInfo(it) }
 
-    suspend fun readOrFetchAndWriteThumbnail(id: HentaiId): HentaiThumbnailInfo? = (
+    suspend fun readOrFetchAndWriteThumbnail(id: HentaiId): HentaiImage? =
         hentaiCache.readThumbnail(id) ?: hentaiService.fetchThumbnail(id)
             .onSuccess { it?.also { thumbnail -> hentaiCache.writeThumbnail(id, thumbnail) } }
             .getOrNull()
-        )?.let { HentaiThumbnailInfo(id, it) }
 
-    suspend fun readOrFetchAndWritePage(id: HentaiId, number: Int): HentaiPageInfo? = (
+    suspend fun readOrFetchAndWritePage(id: HentaiId, number: Int): HentaiImage? =
         hentaiCache.readPage(id, number) ?: hentaiService.fetchPage(id, number)
             .onSuccess { it?.also { page -> hentaiCache.writePage(id, number, page) } }
             .getOrNull()
-        )?.let { HentaiPageInfo(id, number, it) }
 }

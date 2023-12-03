@@ -1,4 +1,4 @@
-package sisterhood.application.hentai
+package sisterhood.application.hentai.viewer
 
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,12 +14,12 @@ import sisterhood.domain.HentaiId
 import sisterhood.domain.HentaiImage
 
 @Composable
-fun HentaiThumbnail(id: HentaiId, fetch: suspend (HentaiId) -> HentaiImage?) {
+fun HentaiPage(id: HentaiId, pageNumber: Int, ratio: Float, fetch: suspend (HentaiId, Int) -> HentaiImage?) {
     AsyncImage(
-        load = { ImageBitmap.from(fetch(id) ?: ByteArray(0)) },
+        load = { ImageBitmap.from(fetch(id, pageNumber) ?: ByteArray(0)) },
         painterFor = { remember { BitmapPainter(it) } },
-        modifier = Modifier.aspectRatio(0.875f).fillMaxWidth(),
+        modifier = Modifier.aspectRatio(ratio).fillMaxWidth(),
         contentDescription = "Thumbnail($id)",
-        contentScale = ContentScale.Crop
+        contentScale = ContentScale.Fit
     )
 }

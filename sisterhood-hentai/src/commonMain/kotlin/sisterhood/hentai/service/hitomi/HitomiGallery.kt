@@ -1,6 +1,12 @@
 package sisterhood.hentai.service.hitomi
 
+import kotlinx.datetime.toKotlinInstant
 import kotlinx.serialization.Serializable
+import sisterhood.domain.Hentai
+import java.time.Instant
+import java.time.format.DateTimeFormatter
+
+const val DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ssX"
 
 @Serializable
 data class HitomiGallery(
@@ -15,4 +21,13 @@ data class HitomiGallery(
     val parodys: List<HitomiParody> = emptyList(),
     val related: List<Int> = emptyList(),
     val tags: List<HitomiTag> = emptyList()
-)
+) {
+    fun toHentai(): Hentai =
+        Hentai(
+            id,
+            title,
+            language.toHentaiLanguage(),
+            files.map { it.toHentaiPage() },
+            Instant.from(DateTimeFormatter.ofPattern(DATETIME_FORMAT).parse(date)).toKotlinInstant()
+        )
+}
