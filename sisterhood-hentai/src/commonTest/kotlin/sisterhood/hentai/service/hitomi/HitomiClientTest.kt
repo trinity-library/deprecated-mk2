@@ -18,7 +18,7 @@ class HitomiClientTest : ExpectSpec() {
             val galleryId = 2726888L
             val hitomiClient = HitomiClient(
                 HttpClient(
-                    MockEngine { request ->
+                    MockEngine {
                         respond(
                             content = File("$resourcesPath/gallery-$galleryId.js").readText(),
                             status = HttpStatusCode.OK,
@@ -42,7 +42,7 @@ class HitomiClientTest : ExpectSpec() {
             val galleryId = 0L
             val hitomiClient = HitomiClient(
                 HttpClient(
-                    MockEngine { request ->
+                    MockEngine {
                         respond(
                             content = File("$resourcesPath/gallery-not-found.html").readText(),
                             status = HttpStatusCode.NotFound,
@@ -67,7 +67,7 @@ class HitomiClientTest : ExpectSpec() {
             val limit = 456
             val hitomiClient = HitomiClient(
                 HttpClient(
-                    MockEngine { request ->
+                    MockEngine {
                         respond(
                             content = File("$resourcesPath/id-index-$offset-$limit.nozomi").readBytes(),
                             status = HttpStatusCode.PartialContent,
@@ -128,7 +128,7 @@ class HitomiClientTest : ExpectSpec() {
             val galleryId = 2726888L
             val hitomiClient = HitomiClient(
                 HttpClient(
-                    MockEngine { request ->
+                    MockEngine {
                         respond(ByteArray(123))
                     }
                 )
@@ -138,7 +138,7 @@ class HitomiClientTest : ExpectSpec() {
             // When
             val thumbnails = HitomiImageExtension.entries.flatMap { extension ->
                 HitomiThumbnailSize.entries.map { thumbnailSize ->
-                    hitomiClient.requestThumbnail(galleryId, thumbnailHash, extension, thumbnailSize).getOrThrow()!!
+                    hitomiClient.requestThumbnail(galleryId, thumbnailHash, extension, thumbnailSize).getOrThrow()
                 }
             }
 
