@@ -39,7 +39,6 @@ class HitomiClient(private val httpClient: HttpClient) {
     ): String {
         val gg = requestGG()
 
-        println("yeah")
         val aOrb = Char(97 + gg.m(gg.s(hash)))
         val ext = extension.name.lowercase()
         val processedHash = "${hash.last()}/${hash.substring(hash.length - 3, hash.length - 1)}"
