@@ -18,6 +18,7 @@ fun HentaiGrid(
     fetchInfo: suspend (HentaiId) -> HentaiInfo?,
     fetchThumbnail: suspend (HentaiId) -> HentaiImage?,
     onFetchMoreIds: suspend () -> Unit,
+    onPressItem: (HentaiInfo) -> Unit,
     onRefresh: suspend () -> Unit
 ) {
     val lazyGridState = rememberLazyGridState()
@@ -32,7 +33,7 @@ fun HentaiGrid(
         contentPadding = PaddingValues(horizontal = 12.dp)
     ) {
         items(ids) { id ->
-            HentaiItem(id, fetchInfo, fetchThumbnail, {})
+            HentaiItem(id, fetchInfo, fetchThumbnail, onPressItem)
         }
     }
 }

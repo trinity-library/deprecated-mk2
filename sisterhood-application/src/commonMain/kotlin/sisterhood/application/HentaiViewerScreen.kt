@@ -1,6 +1,7 @@
 package sisterhood.application
 
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
@@ -13,17 +14,17 @@ import sisterhood.usecase.HentaiInfo
 
 @Composable
 fun HentaiViewerScreen(
-    id: HentaiId,
-    fetchInfo: suspend (HentaiId) -> HentaiInfo?,
-    fetchPage: suspend (HentaiId, Int) -> HentaiImage?
+    hentai: HentaiInfo,
+//    fetchPage: suspend (HentaiId, Int) -> HentaiImage?
 ) {
-    val info by produceState<HentaiInfo?>(null) {
-        value = withContext(Dispatchers.IO) { fetchInfo(id) }
-    }
-
-    info?.apply {
-        HentaiViewerComponent(this)
-    } ?: run {
-        CircularProgressIndicator()
-    }
+//    val info by produceState<HentaiInfo?>(null) {
+//        value = withContext(Dispatchers.IO) { fetchInfo(id) }
+//    }
+//
+//    info?.apply {
+//        HentaiViewerComponent(this)
+//    } ?: run {
+//        CircularProgressIndicator()
+//    }
+    Text(hentai.id.toString())
 }

@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import sisterhood.application.Dependency
 import sisterhood.domain.HentaiId
 import sisterhood.domain.HentaiLanguage
+import sisterhood.usecase.HentaiInfo
 import sisterhood.usecase.HentaiUnitOfWork
 
 const val FETCH_SIZE = 10
