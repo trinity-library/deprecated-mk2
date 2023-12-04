@@ -22,7 +22,10 @@ class HitomiService(httpClient: HttpClient) : HentaiService {
             }
         }
 
-    override suspend fun fetchPage(id: HentaiId, number: Int): Result<HentaiImage?> {
-        TODO("Not yet implemented")
-    }
+    override suspend fun fetchPage(id: HentaiId, number: Int): Result<HentaiImage?> =
+        hitomi.requestGallery(id).mapCatching {
+            it!!.let { gallery ->
+                hitomi.requestPage(id, gallery.files[number].hash).getOrThrow()
+            }
+        }
 }
