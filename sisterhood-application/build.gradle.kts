@@ -2,6 +2,7 @@ import sisterhood.androidWithDefault
 
 plugins {
     alias(libs.plugins.compose)
+    alias(libs.plugins.kotlin.plugin.serialization)
     id(libs.plugins.android.library.get().pluginId)
     id(libs.plugins.kotlin.multiplatform.get().pluginId)
 }

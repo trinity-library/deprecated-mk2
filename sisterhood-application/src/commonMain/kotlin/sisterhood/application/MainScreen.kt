@@ -6,14 +6,17 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import sisterhood.application.hentai.HentaiPage
+import sisterhood.application.hentai.HentaiComponent
+import sisterhood.usecase.HentaiInfo
 
 @Preview
 @Composable
-fun MainScreen() {
+fun MainScreen(naviToHentaiViewerScreen: (HentaiInfo) -> Unit = {}) {
     Surface(Modifier.fillMaxSize()) {
         Column {
-            HentaiPage()
+            HentaiComponent(
+                onPressItem = naviToHentaiViewerScreen
+            )
         }
     }
 }
