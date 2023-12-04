@@ -1,4 +1,5 @@
 plugins {
+    alias(libs.plugins.kotlin.plugin.serialization)
     id(libs.plugins.kotlin.multiplatform.get().pluginId)
 }
 

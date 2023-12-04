@@ -1,8 +1,10 @@
 package sisterhood.usecase
 
+import kotlinx.serialization.Serializable
 import sisterhood.domain.Hentai
 import sisterhood.domain.HentaiId
 
+@Serializable
 data class HentaiInfo(
     val id: HentaiId,
     val title: String,
