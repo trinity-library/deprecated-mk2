@@ -1,6 +1,10 @@
 package sisterhood.application.hentai.viewer
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import sisterhood.usecase.HentaiInfo
@@ -9,8 +13,10 @@ import sisterhood.usecase.HentaiInfo
 fun HentaiViewerComponent(hentai: HentaiInfo) {
     val store = remember { HentaiViewerComponentStore() }
 
-    Column {
-        hentai.pages.forEachIndexed { pageNumber, page ->
+    val state = rememberLazyListState()
+
+    LazyColumn(state = state) {
+        itemsIndexed(hentai.pages) { pageNumber, page ->
             HentaiPage(hentai.id, pageNumber, page.size.ratio, store::fetchPage)
         }
     }

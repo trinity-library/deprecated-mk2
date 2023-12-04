@@ -32,18 +32,19 @@ class NaviScope internal constructor(
         route: String,
         crossinline screenWithProp: ScreenWithProp<@Serializable T>
     ) = naviFrom(route) {
-        state.propSerialized?.also {
-            screenWithProp(Json.decodeFromString(it))
+        state.propSerialized?.also { propSerialized ->
+            screenWithProp(Json.decodeFromString(propSerialized))
         } ?: run {
             NotFound()
         }
     }
 
     @Composable
-    fun render() =
+    fun render() {
         state.mapping[state.currentRoute]?.also { currentScreen ->
             currentScreen()
         } ?: run {
             NotFound()
         }
+    }
 }
