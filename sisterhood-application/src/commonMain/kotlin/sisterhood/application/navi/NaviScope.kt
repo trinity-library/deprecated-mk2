@@ -1,6 +1,5 @@
 package sisterhood.application.navi
 
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -14,37 +13,16 @@ class NaviScope internal constructor(
 ) {
     var state by mutableStateOf(state)
 
-    fun naviTo(route: String) {
+    fun naviTo(route: String): NaviScope {
+        state.currentProp = null
         state.currentRoute = route
+        return this
     }
 
     @OptIn(InternalSerializationApi::class)
-    inline fun <reified T : Any> naviTo(route: String, prop: @Serializable T) {
-        naviTo(route)
-        state.propSerialized = Json.encodeToString(T::class.serializer(), prop)
-    }
-
-    fun naviFrom(route: String, screen: Screen) {
-        state.mapping += mapOf(route to screen)
-    }
-
-    inline fun <reified T : Any> naviFrom(
-        route: String,
-        crossinline screenWithProp: ScreenWithProp<@Serializable T>
-    ) = naviFrom(route) {
-        state.propSerialized?.also { propSerialized ->
-            screenWithProp(Json.decodeFromString(propSerialized))
-        } ?: run {
-            NotFound()
-        }
-    }
-
-    @Composable
-    fun render() {
-        state.mapping[state.currentRoute]?.also { currentScreen ->
-            currentScreen()
-        } ?: run {
-            NotFound()
-        }
+    inline fun <reified T : Any> naviTo(route: String, prop: @Serializable T): NaviScope {
+        state.currentProp = Json.encodeToString(T::class.serializer(), prop)
+        state.currentRoute = route
+        return this
     }
 }

@@ -8,14 +8,14 @@ import sisterhood.usecase.HentaiInfo
 @Preview
 @Composable
 fun MainApp() {
-    Navi(startRoute = "/main") {
-        naviFrom("/main") {
+    Navi(startRoute = "main") {
+        naviFrom("main") {
             MainScreen(
-                naviToHentaiViewerScreen = { hentai: HentaiInfo -> naviTo("/viewer", hentai) }
+                naviToHentaiViewerScreen = { hentai: HentaiInfo -> naviTo("viewer", hentai) }
             )
         }
 
-        naviFrom("/viewer") { hentai: HentaiInfo ->
+        naviFrom("viewer") { hentai: HentaiInfo ->
             HentaiViewerScreen(hentai)
         }
     }

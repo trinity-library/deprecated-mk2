@@ -2,14 +2,19 @@ package sisterhood.application.navi
 
 import androidx.compose.runtime.Composable
 
+const val DEFAULT_START_ROUTE = "/"
+
 @Composable
 fun Navi(
-    startRoute: String = "/",
-    naviState: NaviState = rememberNaviState(),
-    initialize: NaviScope.() -> Unit = {}
+    startRoute: String = DEFAULT_START_ROUTE,
+    naviState: NaviState = rememberNaviState(DEFAULT_START_ROUTE),
+    initialize: NaviBuilder.() -> Unit = {}
 ) {
-    val scope = NaviScope(naviState)
-    scope.initialize()
-    scope.naviTo(startRoute)
-    scope.render()
+    naviState
+        .also {
+            NaviBuilder(it).initialize()
+        }
+        .apply {
+            Render(NaviScope(this).naviTo(startRoute))
+        }
 }

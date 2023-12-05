@@ -4,23 +4,39 @@ import androidx.compose.runtime.*
 
 @Composable
 fun rememberNaviState(
-    currentRoute: String = "/",
-    stack: ArrayDeque<String> = arrayDequeOf(),
-    mapping: Map<String, Screen> = emptyMap(),
-    propSerialized: String? = null
+    startRoute: Route = "/"
 ) = remember {
-    NaviState(currentRoute, stack, mapping, propSerialized)
+    NaviState(startRoute, null)
+}
+
+@Composable
+fun rememberNaviState(
+    startRoute: Route,
+    prop: SerializedProp
+) = remember {
+    NaviState(startRoute, prop)
 }
 
 @Stable
 class NaviState(
-    currentRoute: String,
-    stack: ArrayDeque<String>,
-    mapping: Map<String, Screen>,
-    propSerialized: String?
+    startRoute: Route,
+    prop: SerializedProp?
 ) {
-    var currentRoute by mutableStateOf(currentRoute)
-    var stack by mutableStateOf(stack)
-    var mapping by mutableStateOf(mapping)
-    var propSerialized by mutableStateOf(propSerialized)
+    private val screens: MutableMap<Route, Screen> = mutableMapOf()
+
+    var currentProp by mutableStateOf(prop)
+    var currentRoute by mutableStateOf(startRoute)
+
+    fun register(route: Route, screen: Screen) {
+        screens[route] = screen
+    }
+
+    @Composable
+    fun Render(scope: NaviScope) {
+        screens[currentRoute]?.also { currentScreen ->
+            scope.currentScreen()
+        } ?: run {
+            NotFound()
+        }
+    }
 }
