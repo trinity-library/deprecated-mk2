@@ -25,7 +25,7 @@ fun HentaiGrid(
         state = lazyGridState,
         contentPadding = PaddingValues(horizontal = 12.dp)
     ) {
-        items(state.ids) { id ->
+        items(state.hentaiIds) { id ->
             HentaiItem(id, state::fetchInfo, state::fetchThumbnail, onPressItem)
         }
     }

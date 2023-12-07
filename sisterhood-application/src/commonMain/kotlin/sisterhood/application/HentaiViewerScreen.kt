@@ -8,20 +8,20 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import sisterhood.application.hentai.viewer.HentaiPageListState
 import sisterhood.application.hentai.viewer.HentaiViewerComponent
-import sisterhood.usecase.HentaiInfo
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun HentaiViewerScreen(
-    hentai: HentaiInfo,
+    hentaiPageListState: HentaiPageListState,
     naviToMainScreen: () -> Unit
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             TopAppBar(
-                title = { Text(hentai.title) },
+                title = { Text(hentaiPageListState.hentaiInfo?.title ?: "") },
                 navigationIcon = {
                     IconButton(onClick = naviToMainScreen) {
                         Icon(Icons.Filled.ArrowBack, "backIcon")
@@ -31,7 +31,7 @@ fun HentaiViewerScreen(
         },
     ) {
         Column {
-            HentaiViewerComponent(hentai = hentai)
+            HentaiViewerComponent(hentaiPageListState = hentaiPageListState)
         }
     }
 }

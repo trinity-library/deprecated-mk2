@@ -3,6 +3,7 @@ package sisterhood.application
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import sisterhood.application.hentai.rememberHentaiGridState
+import sisterhood.application.hentai.viewer.rememberHentaiPageListState
 import sisterhood.application.navi.Navi
 import sisterhood.usecase.HentaiInfo
 
@@ -19,9 +20,11 @@ fun MainApp() {
             )
         }
 
-        naviFrom("viewer") { hentai: HentaiInfo ->
+        naviFrom("viewer") { hentaiInfo: HentaiInfo ->
+            val hentaiPageListState = rememberHentaiPageListState(initialHentaiInfo = hentaiInfo)
+
             HentaiViewerScreen(
-                hentai = hentai,
+                hentaiPageListState = hentaiPageListState,
                 naviToMainScreen = { naviTo("main") }
             )
         }
