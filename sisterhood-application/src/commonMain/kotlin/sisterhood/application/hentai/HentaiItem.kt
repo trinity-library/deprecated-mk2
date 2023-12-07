@@ -30,28 +30,28 @@ fun HentaiItem(
     fetchThumbnail: suspend (HentaiId) -> HentaiImage?,
     onPress: (HentaiInfo) -> Unit,
 ) {
-    val info by produceState<HentaiInfo?>(null) {
+    val hentaiInfo by produceState<HentaiInfo?>(null) {
         value = withContext(Dispatchers.IO) { fetchInfo(id) }
     }
 
     Card(
-        onClick = { info?.also { onPress(it) } },
+        onClick = { hentaiInfo?.also { onPress(it) } },
         modifier = Modifier.aspectRatio(0.625f).padding(horizontal = 4.dp),
         border = null,
         elevation = 0.dp
     ) {
         Column {
-            HentaiThumbnail(id, fetchThumbnail)
+            HentaiThumbnail(id = id, fetch = fetchThumbnail)
 
             // TODO: Progress History
-            info?.apply {
+            hentaiInfo?.apply {
                 Spacer(modifier = Modifier.background(Color.DarkGray).fillMaxWidth().height(4.dp))
                 Spacer(modifier = Modifier.height(4.dp))
             } ?: run {
                 Spacer(modifier = Modifier.height(8.dp))
             }
 
-            info?.apply {
+            hentaiInfo?.apply {
                 Text(
                     text = title,
                     fontSize = DEFAULT_SIZE.sp,
