@@ -28,5 +28,9 @@ fun MainApp() {
                 naviToMainScreen = { naviTo("main") }
             )
         }
+
+        naviFrom("settings") {
+            SettingsScreen()
+        }
     }
 }

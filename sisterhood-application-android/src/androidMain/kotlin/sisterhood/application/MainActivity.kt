@@ -15,7 +15,8 @@ class MainActivity : AppCompatActivity() {
 
         Dependency.inject {
             configure {
-                appSpecificPath = filesDir.absolutePath
+                appCachePath = cacheDir.absolutePath
+                appDatabasePath = filesDir.absolutePath
             }
 
             prepare {
