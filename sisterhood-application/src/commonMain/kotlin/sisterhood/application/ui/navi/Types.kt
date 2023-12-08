@@ -1,4 +1,4 @@
-package sisterhood.application.navi
+package sisterhood.application.ui.navi
 
 import androidx.compose.runtime.Composable
 

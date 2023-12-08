@@ -1,10 +1,10 @@
-package sisterhood.application
+package sisterhood.application.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import sisterhood.application.hentai.rememberHentaiGridState
-import sisterhood.application.hentai.viewer.rememberHentaiPageListState
-import sisterhood.application.navi.Navi
+import sisterhood.application.ui.hentai.rememberHentaiGridState
+import sisterhood.application.ui.hentai.viewer.rememberHentaiPageListState
+import sisterhood.application.ui.navi.Navi
 import sisterhood.usecase.HentaiInfo
 
 @Preview

@@ -1,9 +1,9 @@
-package sisterhood.application
+package sisterhood.application.ui.navi
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 
 @Composable
-fun SettingScreen() {
-    Text("Hello settings")
+fun NotFound() {
+    Text("Not Found Route")
 }

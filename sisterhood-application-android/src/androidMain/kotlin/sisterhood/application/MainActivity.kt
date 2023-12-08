@@ -3,6 +3,7 @@ package sisterhood.application
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import sisterhood.application.ui.MainApp
 import sisterhood.hentai.SqliteDriverFactory
 import sisterhood.hentai.cache.HentaiCache
 import sisterhood.hentai.repository.HentaiDatabase

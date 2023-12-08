@@ -1,4 +1,4 @@
-package sisterhood.application
+package sisterhood.application.ui
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
@@ -8,8 +8,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import sisterhood.application.hentai.viewer.HentaiPageListState
-import sisterhood.application.hentai.viewer.HentaiViewerComponent
+import sisterhood.application.ui.hentai.viewer.HentaiPageListState
+import sisterhood.application.ui.hentai.viewer.HentaiViewerComponent
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable

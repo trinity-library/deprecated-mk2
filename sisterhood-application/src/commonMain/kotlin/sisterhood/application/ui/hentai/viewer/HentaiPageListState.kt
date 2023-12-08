@@ -1,4 +1,4 @@
-package sisterhood.application.hentai.viewer
+package sisterhood.application.ui.hentai.viewer
 
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable

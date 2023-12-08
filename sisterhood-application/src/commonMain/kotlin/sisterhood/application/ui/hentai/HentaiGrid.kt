@@ -1,4 +1,4 @@
-package sisterhood.application.hentai
+package sisterhood.application.ui.hentai
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.grid.GridCells
