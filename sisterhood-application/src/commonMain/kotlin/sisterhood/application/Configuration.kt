@@ -2,15 +2,17 @@ package sisterhood.application
 
 data class Configuration(
     val cachePath: String = "",
-    val databasePath: String = ""
+    val databasePath: String = "",
+    val settingsPath: String = "",
 ) {
     class Scope {
         lateinit var appCachePath: String
-        lateinit var appDatabasePath: String
+        lateinit var appFilesPath: String
 
         fun build() = Configuration(
             appCachePath.plus("/.cache.db"),
-            appDatabasePath.plus("/.database.db")
+            appFilesPath.plus("/.database.db"),
+            appFilesPath.plus("/.settings.json")
         )
     }
 }
