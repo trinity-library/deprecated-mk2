@@ -1,10 +1,10 @@
 package sisterhood.application.ui.hentai
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Card
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
@@ -22,7 +22,6 @@ import sisterhood.usecase.HentaiInfo
 
 const val DEFAULT_SIZE = 14f
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun HentaiItem(
     id: HentaiId,
@@ -35,10 +34,11 @@ fun HentaiItem(
     }
 
     Card(
-        onClick = { hentaiInfo?.also { onPress(it) } },
-        modifier = Modifier.aspectRatio(0.625f).padding(horizontal = 4.dp),
-        border = null,
-        elevation = 0.dp
+        modifier = Modifier
+            .aspectRatio(0.625f)
+            .clickable { hentaiInfo?.also { onPress(it) } }
+            .padding(horizontal = 4.dp),
+        border = null
     ) {
         Column {
             HentaiThumbnail(id = id, fetch = fetchThumbnail)
