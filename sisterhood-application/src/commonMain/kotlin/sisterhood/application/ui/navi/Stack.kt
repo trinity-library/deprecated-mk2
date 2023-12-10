@@ -1,4 +1,4 @@
-package sisterhood.application.navi
+package sisterhood.application.ui.navi
 
 fun <T> arrayDequeOf(vararg elements: T) = ArrayDeque(elements.toList())
 

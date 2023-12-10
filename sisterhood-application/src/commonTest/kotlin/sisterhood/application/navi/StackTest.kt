@@ -2,6 +2,10 @@ package sisterhood.application.navi
 
 import io.kotest.core.spec.style.ExpectSpec
 import io.kotest.matchers.shouldBe
+import sisterhood.application.ui.navi.arrayDequeOf
+import sisterhood.application.ui.navi.peek
+import sisterhood.application.ui.navi.pop
+import sisterhood.application.ui.navi.push
 
 class StackTest : ExpectSpec() {
     init {

@@ -4,8 +4,15 @@ import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 
 class HitomiServiceFactory {
-    fun create(): HitomiService {
-        val httpClient = HttpClient(CIO)
-        return HitomiService(httpClient)
+    companion object {
+        lateinit var instance: HitomiService
     }
+
+    fun create(): HitomiService =
+        try {
+            instance
+        } catch (_: UninitializedPropertyAccessException) {
+            instance = HitomiService(HttpClient(CIO))
+            instance
+        }
 }

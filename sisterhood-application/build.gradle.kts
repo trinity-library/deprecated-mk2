@@ -21,11 +21,15 @@ kotlin {
 
         val commonMain by getting {
             dependencies {
+                api(project(":sisterhood-hentai"))
+
+                api(compose.foundation)
                 api(compose.material)
                 api(compose.preview)
                 api(compose.runtime)
                 api(compose.uiTooling)
-                api(project(":sisterhood-hentai"))
+
+                api(libs.okio)
             }
         }
 
