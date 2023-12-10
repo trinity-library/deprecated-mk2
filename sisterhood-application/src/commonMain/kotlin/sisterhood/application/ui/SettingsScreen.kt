@@ -12,14 +12,18 @@ import sisterhood.application.usecase.Settings
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun SettingsScreen(settings: Settings, changeSettings: (Settings) -> Unit, naviToMainScreen: () -> Unit) {
+fun SettingsScreen(
+    settings: Settings,
+    changeSettings: (Settings) -> Unit,
+    naviBack: () -> Unit
+) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             TopAppBar(
                 title = { Text(text = "Settings") },
                 navigationIcon = {
-                    IconButton(onClick = naviToMainScreen) {
+                    IconButton(onClick = naviBack) {
                         Icon(Icons.Filled.ArrowBack, "backIcon")
                     }
                 }

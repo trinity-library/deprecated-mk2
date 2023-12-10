@@ -15,15 +15,15 @@ import sisterhood.application.ui.hentai.viewer.HentaiViewerComponent
 @Composable
 fun HentaiViewerScreen(
     hentaiPageListState: HentaiPageListState,
-    naviToMainScreen: () -> Unit
+    naviBack: () -> Unit
 ) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             TopAppBar(
-                title = { Text(hentaiPageListState.hentaiInfo?.title ?: "") },
+                title = { Text(hentaiPageListState.hentaiInfo.title ?: "") },
                 navigationIcon = {
-                    IconButton(onClick = naviToMainScreen) {
+                    IconButton(onClick = naviBack) {
                         Icon(Icons.Filled.ArrowBack, "backIcon")
                     }
                 }

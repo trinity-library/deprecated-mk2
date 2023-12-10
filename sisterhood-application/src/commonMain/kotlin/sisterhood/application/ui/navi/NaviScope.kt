@@ -1,28 +1,22 @@
 package sisterhood.application.ui.navi
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
-import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.serializer
 
 class NaviScope internal constructor(
-    state: NaviState
+    val state: NaviState
 ) {
-    var state by mutableStateOf(state)
-
-    fun naviTo(route: String): NaviScope {
-        state.currentProp = null
-        state.currentRoute = route
+    fun naviBack(): NaviScope {
+        state.naviBack()
         return this
     }
 
-    @OptIn(InternalSerializationApi::class)
+    fun naviTo(route: String): NaviScope {
+        state.naviTo(route)
+        return this
+    }
+
     inline fun <reified T : Any> naviTo(route: String, prop: @Serializable T): NaviScope {
-        state.currentProp = Json.encodeToString(T::class.serializer(), prop)
-        state.currentRoute = route
+        state.naviTo(route, prop)
         return this
     }
 }
