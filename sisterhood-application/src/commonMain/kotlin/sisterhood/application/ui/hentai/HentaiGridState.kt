@@ -16,6 +16,7 @@ fun rememberHentaiGridState(
     initialIds: List<HentaiId> = emptyList()
 ) = remember {
     HentaiGridState(
+
         firstVisibleItemIndex = initialFirstVisibleItemIndex,
         firstVisibleItemScrollOffset = initialFirstVisibleItemScrollOffset,
         hentaiIds = initialIds,
@@ -27,7 +28,7 @@ class HentaiGridState(
     firstVisibleItemIndex: Int,
     firstVisibleItemScrollOffset: Int,
     hentaiIds: List<HentaiId>,
-    private val uow: HentaiUnitOfWork = Dependency.provideHentaiUnitOfWork()
+    private val uow: HentaiUnitOfWork = Dependency.provideHentaiUnitOfWork(),
 ) {
     var hentaiIds by mutableStateOf(hentaiIds)
     val lazyGridState = LazyGridState(firstVisibleItemIndex, firstVisibleItemScrollOffset)

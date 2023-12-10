@@ -11,6 +11,7 @@ import sisterhood.usecase.HentaiInfo
 
 @Composable
 fun HentaiGrid(
+    columns: Int,
     onPressItem: (HentaiInfo) -> Unit,
     state: HentaiGridState = rememberHentaiGridState()
 ) {
@@ -21,7 +22,7 @@ fun HentaiGrid(
     }
 
     LazyVerticalGrid(
-        columns = GridCells.Fixed(2),
+        columns = GridCells.Fixed(columns),
         state = lazyGridState,
         contentPadding = PaddingValues(horizontal = 12.dp)
     ) {

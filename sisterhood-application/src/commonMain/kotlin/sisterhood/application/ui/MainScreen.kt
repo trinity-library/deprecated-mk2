@@ -12,11 +12,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import sisterhood.application.ui.hentai.HentaiComponent
 import sisterhood.application.ui.hentai.HentaiGridState
+import sisterhood.application.usecase.Settings
 import sisterhood.usecase.HentaiInfo
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun MainScreen(
+    settings: Settings,
     hentaiGridState: HentaiGridState,
     naviToHentaiViewerScreen: (HentaiInfo) -> Unit,
     naviToSettingsScreen: () -> Unit
@@ -34,6 +36,7 @@ fun MainScreen(
     ) {
         Column {
             HentaiComponent(
+                hentaiGridColumns = settings.hentaiGridColumns,
                 hentaiGridState = hentaiGridState,
                 onPressItem = naviToHentaiViewerScreen,
             )

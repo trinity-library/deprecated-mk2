@@ -7,10 +7,12 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import sisterhood.application.ui.settings.SettingsComponent
+import sisterhood.application.usecase.Settings
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun SettingsScreen(naviToMainScreen: () -> Unit) {
+fun SettingsScreen(settings: Settings, changeSettings: (Settings) -> Unit, naviToMainScreen: () -> Unit) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
@@ -24,6 +26,6 @@ fun SettingsScreen(naviToMainScreen: () -> Unit) {
             )
         }
     ) {
-        Text(text = "Hello, settings!")
+        SettingsComponent(settings = settings, changeSettings = changeSettings)
     }
 }
