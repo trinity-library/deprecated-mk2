@@ -1,0 +1,42 @@
+package sisterhood.application.ui
+
+import android.annotation.SuppressLint
+import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import sisterhood.application.ui.hentai.viewer.HentaiPageListState
+import sisterhood.application.ui.hentai.viewer.HentaiViewerComponent
+
+@OptIn(ExperimentalMaterial3Api::class)
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@Composable
+actual fun HentaiViewerScreen(
+    hentaiPageListState: HentaiPageListState,
+    naviBack: () -> Unit
+) {
+    BackHandler { naviBack() }
+
+    Scaffold(
+        modifier = Modifier.fillMaxSize(),
+        topBar = {
+            TopAppBar(
+                title = { Text(hentaiPageListState.hentaiInfo.title ?: "") },
+                navigationIcon = {
+                    IconButton(onClick = naviBack) {
+                        Icon(Icons.Default.ArrowBack, "backIcon")
+                    }
+                }
+            )
+        }
+    ) {
+        Column(modifier = Modifier.padding(top = it.calculateTopPadding())) {
+            HentaiViewerComponent(hentaiPageListState = hentaiPageListState)
+        }
+    }
+}

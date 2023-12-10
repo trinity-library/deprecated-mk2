@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         setContent {
-            MainApp()
+            MainApp(finishApp = this::finish)
         }
     }
 }

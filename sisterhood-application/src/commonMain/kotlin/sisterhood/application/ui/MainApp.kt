@@ -9,16 +9,17 @@ import sisterhood.usecase.HentaiInfo
 
 @Preview
 @Composable
-fun MainApp(state: MainAppState = rememberMainAppState()) {
+fun MainApp(state: MainAppState = rememberMainAppState(), finishApp: () -> Unit) {
     val hentaiGridState = rememberHentaiGridState()
 
-    Navi(startRoute = "main") {
+    Navi(initialRoute = "main") {
         naviFrom("main") {
             MainScreen(
                 settings = state.settings,
                 hentaiGridState = hentaiGridState,
                 naviToHentaiViewerScreen = { hentai: HentaiInfo -> naviTo("viewer", hentai) },
-                naviToSettingsScreen = { naviTo("settings") }
+                naviToSettingsScreen = { naviTo("settings") },
+                naviBack = finishApp
             )
         }
 
@@ -27,7 +28,7 @@ fun MainApp(state: MainAppState = rememberMainAppState()) {
 
             HentaiViewerScreen(
                 hentaiPageListState = hentaiPageListState,
-                naviToMainScreen = { naviTo("main") }
+                naviBack = { naviBack() }
             )
         }
 
@@ -35,7 +36,7 @@ fun MainApp(state: MainAppState = rememberMainAppState()) {
             SettingsScreen(
                 settings = state.settings,
                 changeSettings = state::changeSettings,
-                naviToMainScreen = { naviTo("main") }
+                naviBack = { naviBack() }
             )
         }
     }
