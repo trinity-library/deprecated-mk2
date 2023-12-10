@@ -1,13 +1,17 @@
 package sisterhood.application.ui.settings
 
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.*
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import sisterhood.application.usecase.Settings
 
 @OptIn(ExperimentalMaterialApi::class)
-@Preview
 @Composable
 fun SettingsComponent(
     settings: Settings,
@@ -16,30 +20,52 @@ fun SettingsComponent(
     var expanded by remember { mutableStateOf(false) }
     var selected by remember { mutableStateOf(settings.hentaiGridColumns.toString()) }
 
-    Row {
-        Text(text = "Hentai Grid Columns")
-
-        ExposedDropdownMenuBox(expanded = expanded, onExpandedChange = { expanded = !expanded }) {
-            TextField(
-                value = selected,
-                onValueChange = { },
-                enabled = false
+    Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)) {
+        Row(modifier = Modifier.fillMaxWidth()) {
+            Text(
+                text = "Hentai Grid Columns",
+                modifier = Modifier.align(Alignment.CenterVertically).wrapContentWidth()
             )
 
-            ExposedDropdownMenu(
-                expanded = expanded,
-                onDismissRequest = { expanded = false }
-            ) {
+            Spacer(modifier = Modifier.weight(1f))
 
-                for (i in 2..4) {
-                    DropdownMenuItem(
-                        onClick = {
-                            changeSettings(settings.copy(hentaiGridColumns = i))
-                            selected = i.toString()
-                            expanded = false
+            ExposedDropdownMenuBox(
+                expanded = expanded,
+                onExpandedChange = { expanded = !expanded },
+                modifier = Modifier.width(140.dp)
+            ) {
+                TextField(
+                    value = selected,
+                    onValueChange = { },
+                    readOnly = true,
+                    label = { Text(text = "Columns") },
+                    trailingIcon = {
+                        Icon(
+                            imageVector = if (expanded) {
+                                Icons.Filled.KeyboardArrowUp
+                            } else {
+                                Icons.Filled.KeyboardArrowDown
+                            },
+                            contentDescription = ""
+                        )
+
+                    }
+                )
+
+                ExposedDropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false }
+                ) {
+                    for (i in 2..4) {
+                        DropdownMenuItem(
+                            onClick = {
+                                changeSettings(settings.copy(hentaiGridColumns = i))
+                                selected = i.toString()
+                                expanded = false
+                            }
+                        ) {
+                            Text(i.toString())
                         }
-                    ) {
-                        Text(i.toString())
                     }
                 }
             }
