@@ -16,7 +16,8 @@ fun MainApp() {
         naviFrom("main") {
             MainScreen(
                 hentaiGridState = hentaiGridState,
-                naviToHentaiViewerScreen = { hentai: HentaiInfo -> naviTo("viewer", hentai) }
+                naviToHentaiViewerScreen = { hentai: HentaiInfo -> naviTo("viewer", hentai) },
+                naviToSettingsScreen = { naviTo("settings") }
             )
         }
 
@@ -30,7 +31,9 @@ fun MainApp() {
         }
 
         naviFrom("settings") {
-            SettingsScreen()
+            SettingsScreen(
+                naviToMainScreen = { naviTo("main") }
+            )
         }
     }
 }

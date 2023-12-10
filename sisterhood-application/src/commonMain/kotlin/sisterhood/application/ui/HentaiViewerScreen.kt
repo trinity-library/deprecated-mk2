@@ -28,7 +28,7 @@ fun HentaiViewerScreen(
                     }
                 }
             )
-        },
+        }
     ) {
         Column {
             HentaiViewerComponent(hentaiPageListState = hentaiPageListState)
