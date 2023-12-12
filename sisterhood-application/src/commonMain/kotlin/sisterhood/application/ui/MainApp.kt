@@ -1,43 +1,45 @@
 package sisterhood.application.ui
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
 import sisterhood.application.ui.hentai.rememberHentaiGridState
 import sisterhood.application.ui.hentai.viewer.rememberHentaiPageListState
 import sisterhood.application.ui.navi.Navi
+import sisterhood.application.ui.theme.StaticTheme
 import sisterhood.usecase.HentaiInfo
 
-@Preview
 @Composable
 fun MainApp(state: MainAppState = rememberMainAppState(), finishApp: () -> Unit) {
     val hentaiGridState = rememberHentaiGridState()
+    val settings = state.settings
 
-    Navi(initialRoute = "main") {
-        naviFrom("main") {
-            MainScreen(
-                settings = state.settings,
-                hentaiGridState = hentaiGridState,
-                naviToHentaiViewerScreen = { hentai: HentaiInfo -> naviTo("viewer", hentai) },
-                naviToSettingsScreen = { naviTo("settings") },
-                naviBack = finishApp
-            )
-        }
+    StaticTheme(settings = settings) {
+        Navi(initialRoute = "main") {
+            naviFrom("main") {
+                MainScreen(
+                    settings = settings,
+                    hentaiGridState = hentaiGridState,
+                    naviToHentaiViewerScreen = { hentai: HentaiInfo -> naviTo("viewer", hentai) },
+                    naviToSettingsScreen = { naviTo("settings") },
+                    naviBack = finishApp
+                )
+            }
 
-        naviFrom("viewer") { hentaiInfo: HentaiInfo ->
-            val hentaiPageListState = rememberHentaiPageListState(initialHentaiInfo = hentaiInfo)
+            naviFrom("viewer") { hentaiInfo: HentaiInfo ->
+                val hentaiPageListState = rememberHentaiPageListState(initialHentaiInfo = hentaiInfo)
 
-            HentaiViewerScreen(
-                hentaiPageListState = hentaiPageListState,
-                naviBack = { naviBack() }
-            )
-        }
+                HentaiViewerScreen(
+                    hentaiPageListState = hentaiPageListState,
+                    naviBack = { naviBack() }
+                )
+            }
 
-        naviFrom("settings") {
-            SettingsScreen(
-                settings = state.settings,
-                changeSettings = state::changeSettings,
-                naviBack = { naviBack() }
-            )
+            naviFrom("settings") {
+                SettingsScreen(
+                    settings = settings,
+                    changeSettings = state::changeSettings,
+                    naviBack = { naviBack() }
+                )
+            }
         }
     }
 }
