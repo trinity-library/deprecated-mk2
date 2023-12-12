@@ -2,11 +2,9 @@ package sisterhood.application.ui.theme
 
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
+import sisterhood.application.usecase.ThemeBrightness
 
-val HinataDark = darkColorScheme(
-
-)
-
-val HinataLight = lightColorScheme(
-    
-)
+fun hinataRedColorScheme(themeBrightness: ThemeBrightness) = when (themeBrightness) {
+    ThemeBrightness.LIGHT -> lightColorScheme()
+    ThemeBrightness.DARK -> darkColorScheme()
+}
