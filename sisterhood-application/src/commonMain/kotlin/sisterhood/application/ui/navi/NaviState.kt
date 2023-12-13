@@ -1,6 +1,8 @@
 package sisterhood.application.ui.navi
 
+import androidx.compose.animation.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
@@ -22,7 +24,7 @@ class NaviState(
 
     val stack: ArrayDeque<Pair<Route, SerializedProp?>> = arrayDequeOf()
 
-    var currentProp by mutableStateOf(initialProp)
+    var currentProp: SerializedProp? = initialProp
     var currentRoute by mutableStateOf(initialRoute)
 
     fun register(route: Route, screen: Screen) {
@@ -62,10 +64,15 @@ class NaviState(
 
     @Composable
     fun Render(scope: NaviScope) {
-        screens[currentRoute]?.also { currentScreen ->
-            scope.currentScreen()
-        } ?: run {
-            NotFound()
+        screens.forEach { (route, screen) ->
+            AnimatedVisibility(
+                visible = (route == currentRoute),
+                modifier = Modifier,
+                enter = slideInVertically() + expandVertically() + fadeIn(),
+                exit = slideOutVertically() + shrinkVertically() + fadeOut()
+            ) {
+                scope.screen()
+            }
         }
     }
 }
