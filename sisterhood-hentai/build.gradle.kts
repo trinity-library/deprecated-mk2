@@ -66,5 +66,13 @@ sqldelight {
             dialect("app.cash.sqldelight:sqlite-3-38-dialect:${libs.versions.sqldelight.get()}")
             srcDirs.setFrom("src/commonMain/sqldelight/database")
         }
+
+        create("HitomiDatabase") {
+            generateAsync = true
+            packageName = "sisterhood.hentai.infrastructure.hitomi"
+
+            dialect("app.cash.sqldelight:sqlite-3-38-dialect:${libs.versions.sqldelight.get()}")
+            srcDirs.setFrom("src/commonMain/sqldelight/hitomi")
+        }
     }
 }

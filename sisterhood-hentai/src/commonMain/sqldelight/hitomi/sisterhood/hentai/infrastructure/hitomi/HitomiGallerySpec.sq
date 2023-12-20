@@ -1,0 +1,93 @@
+import kotlin.Int;
+import kotlin.collections.List;
+import sisterhood.hentai.domain.hitomi.HitomiArtist;
+import sisterhood.hentai.domain.hitomi.HitomiCharacter;
+import sisterhood.hentai.domain.hitomi.HitomiFile;
+import sisterhood.hentai.domain.hitomi.HitomiGroup;
+import sisterhood.hentai.domain.hitomi.HitomiLanguage;
+import sisterhood.hentai.domain.hitomi.HitomiParody;
+import sisterhood.hentai.domain.hitomi.HitomiTag;
+
+CREATE TABLE IF NOT EXISTS hitomiGallerySpec(
+    id INTEGER PRIMARY KEY,
+    title TEXT NOT NULL,
+    language TEXT AS HitomiLanguage NOT NULL,
+    files TEXT AS List<HitomiFile> NOT NULL,
+    date TEXT NOT NULL,
+    related TEXT AS List<Int> NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS hitomiArtistSpec(
+    id INTEGER NOT NULL,
+    artist TEXT AS HitomiArtist NOT NULL,
+    PRIMARY KEY(id, artist)
+);
+
+CREATE TABLE IF NOT EXISTS hitomiCharacterSpec(
+    id INTEGER NOT NULL,
+    character TEXT AS HitomiCharacter NOT NULL,
+    PRIMARY KEY(id, character)
+);
+
+CREATE TABLE IF NOT EXISTS hitomiGroupSpec(
+    id INTEGER NOT NULL,
+    hgroup TEXT AS HitomiGroup NOT NULL,
+    PRIMARY KEY(id, hgroup)
+);
+
+CREATE TABLE IF NOT EXISTS hitomiParodySpec(
+    id INTEGER NOT NULL,
+    parody TEXT AS HitomiParody NOT NULL,
+    PRIMARY KEY(id, parody)
+);
+
+CREATE TABLE IF NOT EXISTS hitomiTagSpec(
+    id INTEGER NOT NULL,
+    tag TEXT AS HitomiTag NOT NULL,
+    PRIMARY KEY(id, tag)
+);
+
+CREATE VIEW IF NOT EXISTS hitomiGalleryView AS SELECT
+    hitomiGallerySpec.id,
+    hitomiGallerySpec.title,
+    hitomiGallerySpec.language,
+    hitomiGallerySpec.files,
+    hitomiGallerySpec.date,
+    hitomiGallerySpec.related,
+    group_concat(hitomiArtistSpec.artist) artists,
+    group_concat(hitomiCharacterSpec.character) characters,
+    group_concat(hitomiGroupSpec.hgroup) groups,
+    group_concat(hitomiParodySpec.parody) parodys,
+    group_concat(hitomiTagSpec.tag) tags
+FROM hitomiGallerySpec
+LEFT JOIN hitomiArtistSpec ON hitomiGallerySpec.id = hitomiArtistSpec.id
+LEFT JOIN hitomiCharacterSpec ON hitomiGallerySpec.id = hitomiCharacterSpec.id
+LEFT JOIN hitomiGroupSpec ON hitomiGallerySpec.id = hitomiGroupSpec.id
+LEFT JOIN hitomiParodySpec ON hitomiGallerySpec.id = hitomiParodySpec.id
+LEFT JOIN hitomiTagSpec ON hitomiGallerySpec.id = hitomiTagSpec.id
+    GROUP BY hitomiGallerySpec.id ORDER BY hitomiGallerySpec.id DESC;
+
+selectGalleries:
+SELECT * FROM hitomiGalleryView ORDER BY id DESC;
+
+selectGallery:
+SELECT * FROM hitomiGalleryView WHERE id = ?;
+
+insertGallery:
+INSERT OR IGNORE INTO hitomiGallerySpec(id, title, language, files, date, related)
+    VALUES(?, ?, ?, ?, ?, ?);
+
+insertArtist:
+INSERT OR IGNORE INTO hitomiArtistSpec(id, artist) VALUES(?, ?);
+
+insertCharacter:
+INSERT OR IGNORE INTO hitomiCharacterSpec(id, character) VALUES(?, ?);
+
+insertGroup:
+INSERT OR IGNORE INTO hitomiGroupSpec(id, hgroup) VALUES(?, ?);
+
+insertParody:
+INSERT OR IGNORE INTO hitomiParodySpec(id, parody) VALUES(?, ?);
+
+insertTag:
+INSERT OR IGNORE INTO hitomiTagSpec(id, tag) VALUES(?, ?);
