@@ -1,4 +1,4 @@
-package sisterhood.hentai.service.hitomi
+package sisterhood.hentai.infrastructure.hitomi
 
 import io.ktor.client.*
 import io.ktor.client.call.*
@@ -12,7 +12,7 @@ import sisterhood.hentai.domain.hitomi.HitomiGallery
 import sisterhood.hentai.domain.hitomi.HitomiImageExtension
 import sisterhood.hentai.domain.hitomi.HitomiLanguage
 import sisterhood.hentai.domain.hitomi.HitomiThumbnailSize
-import sisterhood.hentai.service.getResult
+import sisterhood.hentai.infrastructure.getResult
 import java.nio.ByteBuffer
 
 class HitomiClient(private val httpClient: HttpClient) {

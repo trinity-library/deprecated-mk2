@@ -1,4 +1,4 @@
-package sisterhood.hentai.service.hitomi
+package sisterhood.hentai.infrastructure.hitomi
 
 import io.ktor.client.*
 import sisterhood.domain.*

@@ -1,4 +1,4 @@
-package sisterhood.hentai.service.ehentai
+package sisterhood.hentai.infrastructure.ehentai
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

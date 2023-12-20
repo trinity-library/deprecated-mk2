@@ -1,4 +1,4 @@
-package sisterhood.hentai.service.hitomi
+package sisterhood.hentai.infrastructure.hitomi
 
 class GG(
     private val caseNumbers: Set<Int>,

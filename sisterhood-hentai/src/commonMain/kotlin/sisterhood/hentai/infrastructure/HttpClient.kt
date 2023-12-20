@@ -1,4 +1,4 @@
-package sisterhood.hentai.service
+package sisterhood.hentai.infrastructure
 
 import io.ktor.client.*
 import io.ktor.client.plugins.*

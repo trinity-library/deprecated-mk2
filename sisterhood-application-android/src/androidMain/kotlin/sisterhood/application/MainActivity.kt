@@ -6,8 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import sisterhood.application.ui.MainApp
 import sisterhood.hentai.SqliteDriverFactory
 import sisterhood.hentai.cache.HentaiCache
+import sisterhood.hentai.infrastructure.hitomi.HitomiServiceFactory
 import sisterhood.hentai.repository.HentaiDatabase
-import sisterhood.hentai.service.hitomi.HitomiServiceFactory
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

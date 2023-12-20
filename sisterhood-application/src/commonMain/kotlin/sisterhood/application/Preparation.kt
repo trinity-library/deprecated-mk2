@@ -5,8 +5,8 @@ import app.cash.sqldelight.db.SqlSchema
 import sisterhood.application.driver.OkioSettingsStoreFactory
 import sisterhood.hentai.SqliteDriverFactory
 import sisterhood.hentai.cache.SqlDelightHentaiCacheFactory
+import sisterhood.hentai.infrastructure.hitomi.HitomiServiceFactory
 import sisterhood.hentai.repository.SqlDelightHentaiRepositoryFactory
-import sisterhood.hentai.service.hitomi.HitomiServiceFactory
 
 data class Preparation(
     val cacheFactory: SqlDelightHentaiCacheFactory,
