@@ -1,4 +1,4 @@
-package sisterhood.hentai.service.ehentai
+package sisterhood.hentai.domain.ehentai
 
 import kotlinx.serialization.Serializable
 

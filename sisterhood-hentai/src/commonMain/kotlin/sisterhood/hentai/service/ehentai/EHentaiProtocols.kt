@@ -2,6 +2,9 @@ package sisterhood.hentai.service.ehentai
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import sisterhood.hentai.domain.ehentai.EHentaiGallery
+import sisterhood.hentai.domain.ehentai.EHentaiGalleryToken
+import sisterhood.hentai.domain.ehentai.EHentaiPageToken
 
 @Serializable
 sealed class EHentaiRequest(val method: String)

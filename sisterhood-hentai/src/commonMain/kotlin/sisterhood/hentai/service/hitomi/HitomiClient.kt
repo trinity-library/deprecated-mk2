@@ -8,6 +8,10 @@ import io.ktor.http.*
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import sisterhood.domain.HentaiId
+import sisterhood.hentai.domain.hitomi.HitomiGallery
+import sisterhood.hentai.domain.hitomi.HitomiImageExtension
+import sisterhood.hentai.domain.hitomi.HitomiLanguage
+import sisterhood.hentai.domain.hitomi.HitomiThumbnailSize
 import sisterhood.hentai.service.getResult
 import java.nio.ByteBuffer
 

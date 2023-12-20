@@ -2,12 +2,10 @@ package sisterhood.hentai.service.hitomi
 
 import io.ktor.client.*
 import sisterhood.domain.*
-import java.time.format.DateTimeFormatter
+import sisterhood.hentai.domain.hitomi.HitomiLanguage
 
 class HitomiService(httpClient: HttpClient) : HentaiService {
     private val hitomi = HitomiClient(httpClient)
-
-    private val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ssX")
 
     override suspend fun fetchIds(language: HentaiLanguage, offset: Int, limit: Int): Result<List<HentaiId>> =
         hitomi.requestGalleryIds(HitomiLanguage.from(language), offset, limit)

@@ -1,4 +1,4 @@
-package sisterhood.hentai.service.hitomi
+package sisterhood.hentai.domain.hitomi
 
 import sisterhood.domain.HentaiLanguage
 

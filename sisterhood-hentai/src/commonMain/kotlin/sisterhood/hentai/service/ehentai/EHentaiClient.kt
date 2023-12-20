@@ -6,6 +6,9 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.serialization.json.Json
+import sisterhood.hentai.domain.ehentai.EHentaiGallery
+import sisterhood.hentai.domain.ehentai.EHentaiGalleryToken
+import sisterhood.hentai.domain.ehentai.EHentaiPageToken
 
 const val EHENTAI_API_URL = "https://api.e-hentai.org/api.php"
 

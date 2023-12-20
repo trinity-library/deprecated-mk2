@@ -7,6 +7,9 @@ import io.kotest.matchers.shouldBe
 import io.ktor.client.*
 import io.ktor.client.engine.mock.*
 import io.ktor.http.*
+import sisterhood.hentai.domain.hitomi.HitomiImageExtension
+import sisterhood.hentai.domain.hitomi.HitomiLanguage
+import sisterhood.hentai.domain.hitomi.HitomiThumbnailSize
 import java.io.File
 
 class HitomiClientTest : ExpectSpec() {
