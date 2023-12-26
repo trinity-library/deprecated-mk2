@@ -10,6 +10,7 @@ import io.ktor.http.*
 import sisterhood.hentai.domain.hitomi.HitomiImageExtension
 import sisterhood.hentai.domain.hitomi.HitomiLanguage
 import sisterhood.hentai.domain.hitomi.HitomiThumbnailSize
+import sisterhood.hentai.infrastructure.KtorHitomiClient
 import java.io.File
 
 class HitomiClientTest : ExpectSpec() {
@@ -19,7 +20,7 @@ class HitomiClientTest : ExpectSpec() {
         expect("can retrieve a gallery") {
             // Given
             val galleryId = 2726888L
-            val hitomiClient = HitomiClient(
+            val ktorHitomiClient = KtorHitomiClient(
                 HttpClient(
                     MockEngine {
                         respond(
@@ -34,7 +35,7 @@ class HitomiClientTest : ExpectSpec() {
             )
 
             // When
-            val gallery = hitomiClient.requestGallery(galleryId).getOrThrow()!!
+            val gallery = ktorHitomiClient.requestGallery(galleryId).getOrThrow()!!
 
             // Then
             gallery.id shouldBeExactly galleryId
@@ -43,7 +44,7 @@ class HitomiClientTest : ExpectSpec() {
         expect("retrieve null if the gallery with given id doesn't exist") {
             // Given
             val galleryId = 0L
-            val hitomiClient = HitomiClient(
+            val ktorHitomiClient = KtorHitomiClient(
                 HttpClient(
                     MockEngine {
                         respond(
@@ -58,7 +59,7 @@ class HitomiClientTest : ExpectSpec() {
             )
 
             // When
-            val gallery = hitomiClient.requestGallery(galleryId).getOrThrow()
+            val gallery = ktorHitomiClient.requestGallery(galleryId).getOrThrow()
 
             // Then
             gallery shouldBe null
@@ -68,7 +69,7 @@ class HitomiClientTest : ExpectSpec() {
             // Given
             val offset = 123
             val limit = 456
-            val hitomiClient = HitomiClient(
+            val ktorHitomiClient = KtorHitomiClient(
                 HttpClient(
                     MockEngine {
                         respond(
@@ -85,7 +86,7 @@ class HitomiClientTest : ExpectSpec() {
             )
 
             // When
-            val galleryIds = hitomiClient.requestGalleryIds(HitomiLanguage.ENGLISH, offset, limit).getOrThrow()
+            val galleryIds = ktorHitomiClient.requestGalleryIds(HitomiLanguage.ENGLISH, offset, limit).getOrThrow()
 
             // Then
             galleryIds.size shouldBeExactly limit
@@ -94,7 +95,7 @@ class HitomiClientTest : ExpectSpec() {
         expect("can retrieve pages with each extensions") {
             // Given
             val galleryId = 2726888L
-            val hitomiClient = HitomiClient(
+            val ktorHitomiClient = KtorHitomiClient(
                 HttpClient(
                     MockEngine { request ->
                         if (request.url.toString() == "https://ltn.hitomi.la/gg.js") {
@@ -118,7 +119,7 @@ class HitomiClientTest : ExpectSpec() {
 
             // When
             val pages = HitomiImageExtension.entries.map { extension ->
-                hitomiClient.requestPage(galleryId, pageHash, extension).getOrThrow()
+                ktorHitomiClient.requestPage(galleryId, pageHash, extension).getOrThrow()
             }
 
             // Then
@@ -128,7 +129,7 @@ class HitomiClientTest : ExpectSpec() {
 
         expect("can retrieve thumbnails with each extensions and sizes") {
             // Given
-            val hitomiClient = HitomiClient(
+            val ktorHitomiClient = KtorHitomiClient(
                 HttpClient(
                     MockEngine { request ->
                         if (request.url.toString() == "https://ltn.hitomi.la/gg.js") {
@@ -153,7 +154,7 @@ class HitomiClientTest : ExpectSpec() {
             // When
             val thumbnails = HitomiImageExtension.entries.flatMap { extension ->
                 HitomiThumbnailSize.entries.map { thumbnailSize ->
-                    hitomiClient.requestThumbnail(thumbnailHash, extension, thumbnailSize).getOrThrow()
+                    ktorHitomiClient.requestThumbnail(thumbnailHash, extension, thumbnailSize).getOrThrow()
                 }
             }
 

@@ -5,7 +5,7 @@ import androidx.compose.runtime.*
 import sisterhood.application.Dependency
 import sisterhood.domain.HentaiId
 import sisterhood.domain.HentaiLanguage
-import sisterhood.usecase.HentaiUnitOfWork
+import sisterhood.presentation.HentaiUnitOfWork
 
 const val FETCH_SIZE = 10
 
@@ -33,9 +33,9 @@ class HentaiGridState(
     var hentaiIds by mutableStateOf(hentaiIds)
     val lazyGridState = LazyGridState(firstVisibleItemIndex, firstVisibleItemScrollOffset)
 
-    suspend fun fetchInfo(id: HentaiId) = uow.selectOrFetchAndInsertHentai(id)
+    suspend fun fetchInfo(id: HentaiId) = uow.fetchHentai(id)
 
-    suspend fun fetchThumbnail(id: HentaiId) = uow.readOrFetchAndWriteThumbnail(id)
+    suspend fun fetchThumbnail(id: HentaiId) = uow.fetchThumbnail(id)
 
     suspend fun onFetchMoreIds() {
         val offset = hentaiIds.size

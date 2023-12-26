@@ -1,15 +1,19 @@
 package sisterhood.application
 
-import sisterhood.usecase.HentaiUnitOfWork
+import sisterhood.hentai.business.HitomiService
+import sisterhood.hentai.presentation.ConcreteHentaiUnitOfWork
+import sisterhood.presentation.HentaiUnitOfWork
 
 object Dependency {
     lateinit var configuration: Configuration
     lateinit var preparation: Preparation
 
-    fun provideHentaiUnitOfWork() = HentaiUnitOfWork(
-        hentaiCache = preparation.cacheFactory.create(),
-        hentaiRepository = preparation.repositoryFactory.create(),
-        hentaiService = preparation.serviceFactory.create()
+    fun provideHentaiUnitOfWork(): HentaiUnitOfWork = ConcreteHentaiUnitOfWork(
+        hitomiService = HitomiService(
+            client = preparation.clientFactory.create(),
+            cache = preparation.cacheFactory.create(),
+            repository = preparation.repositoryFactory.create()
+        )
     )
 
     fun provideSettingsStore() = preparation.storeFactory.create()

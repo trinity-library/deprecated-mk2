@@ -54,11 +54,11 @@ CREATE VIEW IF NOT EXISTS hitomiGalleryView AS SELECT
     hitomiGallerySpec.files,
     hitomiGallerySpec.date,
     hitomiGallerySpec.related,
-    group_concat(hitomiArtistSpec.artist) artists,
-    group_concat(hitomiCharacterSpec.character) characters,
-    group_concat(hitomiGroupSpec.hgroup) groups,
-    group_concat(hitomiParodySpec.parody) parodys,
-    group_concat(hitomiTagSpec.tag) tags
+    group_concat(hitomiArtistSpec.artist, ';') artists,
+    group_concat(hitomiCharacterSpec.character, ';') characters,
+    group_concat(hitomiGroupSpec.hgroup, ';') groups,
+    group_concat(hitomiParodySpec.parody, ';') parodys,
+    group_concat(hitomiTagSpec.tag, ';') tags
 FROM hitomiGallerySpec
 LEFT JOIN hitomiArtistSpec ON hitomiGallerySpec.id = hitomiArtistSpec.id
 LEFT JOIN hitomiCharacterSpec ON hitomiGallerySpec.id = hitomiCharacterSpec.id

@@ -5,9 +5,6 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import sisterhood.application.ui.MainApp
 import sisterhood.hentai.SqliteDriverFactory
-import sisterhood.hentai.cache.HentaiCache
-import sisterhood.hentai.infrastructure.hitomi.HitomiServiceFactory
-import sisterhood.hentai.repository.HentaiDatabase
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,10 +17,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             prepare {
-                cacheSchema = HentaiCache.Schema
-                databaseSchema = HentaiDatabase.Schema
                 sqliteDriverFactory = SqliteDriverFactory(baseContext)
-                serviceFactory = HitomiServiceFactory()
             }
         }
 

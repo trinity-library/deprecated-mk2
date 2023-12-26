@@ -1,18 +1,18 @@
-package sisterhood.hentai.infrastructure.hitomi
+package sisterhood.hentai.infrastructure
 
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 
-class HitomiServiceFactory {
+class KtorHitomiClientFactory {
     companion object {
-        lateinit var instance: HitomiService
+        lateinit var instance: KtorHitomiClient
     }
 
-    fun create(): HitomiService =
+    fun create(): KtorHitomiClient =
         try {
             instance
         } catch (_: UninitializedPropertyAccessException) {
-            instance = HitomiService(HttpClient(CIO))
+            instance = KtorHitomiClient(HttpClient(CIO))
             instance
         }
 }

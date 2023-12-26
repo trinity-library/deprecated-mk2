@@ -3,7 +3,7 @@ package sisterhood.application.ui
 import androidx.compose.runtime.Composable
 import sisterhood.application.ui.hentai.HentaiGridState
 import sisterhood.application.usecase.Settings
-import sisterhood.usecase.HentaiInfo
+import sisterhood.presentation.HentaiInfo
 
 @Composable
 expect fun MainScreen(

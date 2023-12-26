@@ -7,7 +7,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.unit.dp
-import sisterhood.usecase.HentaiInfo
+import sisterhood.presentation.HentaiInfo
 
 @Composable
 fun HentaiGrid(

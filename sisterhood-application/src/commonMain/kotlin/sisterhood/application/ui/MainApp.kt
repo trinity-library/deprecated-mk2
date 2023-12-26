@@ -5,7 +5,7 @@ import sisterhood.application.ui.hentai.rememberHentaiGridState
 import sisterhood.application.ui.hentai.viewer.rememberHentaiPageListState
 import sisterhood.application.ui.navi.Navi
 import sisterhood.application.ui.theme.StaticTheme
-import sisterhood.usecase.HentaiInfo
+import sisterhood.presentation.HentaiInfo
 
 @Composable
 fun MainApp(state: MainAppState = rememberMainAppState(), finishApp: () -> Unit) {

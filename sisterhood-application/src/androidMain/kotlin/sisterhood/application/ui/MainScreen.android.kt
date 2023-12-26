@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import sisterhood.application.ui.hentai.HentaiComponent
 import sisterhood.application.ui.hentai.HentaiGridState
 import sisterhood.application.usecase.Settings
-import sisterhood.usecase.HentaiInfo
+import sisterhood.presentation.HentaiInfo
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable

@@ -5,8 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import sisterhood.application.Dependency
 import sisterhood.domain.HentaiId
-import sisterhood.usecase.HentaiInfo
-import sisterhood.usecase.HentaiUnitOfWork
+import sisterhood.presentation.HentaiInfo
+import sisterhood.presentation.HentaiUnitOfWork
 
 @Composable
 fun rememberHentaiPageListState(
@@ -29,5 +29,5 @@ class HentaiPageListState(
 ) {
     val lazyListState = LazyListState(firstVisibleItemIndex, firstVisibleItemScrollOffset)
 
-    suspend fun fetchPage(id: HentaiId, pageNumber: Int) = uow.readOrFetchAndWritePage(id, pageNumber)
+    suspend fun fetchPage(id: HentaiId, pageNumber: Int) = uow.fetchPage(id, pageNumber)
 }

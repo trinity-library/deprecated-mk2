@@ -1,4 +1,4 @@
-package sisterhood.usecase
+package sisterhood.presentation
 
 import sisterhood.domain.HentaiId
 import sisterhood.domain.HentaiImage

@@ -1,7 +1,7 @@
 package sisterhood.application.ui.hentai
 
 import androidx.compose.runtime.Composable
-import sisterhood.usecase.HentaiInfo
+import sisterhood.presentation.HentaiInfo
 
 @Composable
 fun HentaiComponent(

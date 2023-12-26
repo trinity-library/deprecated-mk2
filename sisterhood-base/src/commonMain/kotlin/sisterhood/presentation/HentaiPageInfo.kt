@@ -1,4 +1,4 @@
-package sisterhood.usecase
+package sisterhood.presentation
 
 import kotlinx.serialization.Serializable
 import sisterhood.domain.HentaiPage

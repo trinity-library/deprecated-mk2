@@ -18,7 +18,7 @@ import kotlinx.coroutines.withContext
 import sisterhood.application.ui.LoadingText
 import sisterhood.domain.HentaiId
 import sisterhood.domain.HentaiImage
-import sisterhood.usecase.HentaiInfo
+import sisterhood.presentation.HentaiInfo
 
 const val DEFAULT_SIZE = 14f
 
